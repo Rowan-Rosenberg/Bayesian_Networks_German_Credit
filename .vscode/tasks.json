@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Create_BN.py",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"Create_BN.py"
+			],
+			"problemMatcher": [
+				"$python"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Run Create_BN.py",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"Create_BN.py"
+			],
+			"problemMatcher": [
+				"$python"
+			],
+			"group": "build"
+		}
+	]
+}
