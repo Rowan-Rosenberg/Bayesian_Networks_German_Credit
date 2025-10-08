@@ -30,6 +30,10 @@ variable Income {
    type discrete[2] {0, 1};
 }
 
+variable ResidenceSince {
+   type discrete[2] {0, 1};
+}
+
 variable CreditHistory {
    type discrete[2] {0, 1};
 }
@@ -46,11 +50,11 @@ variable OtherDebtors {
    type discrete[2] {0, 1};
 }
 
-variable LoanAmount {
+variable CreditAmount {
    type discrete[2] {0, 1};
 }
 
-variable LoanDuration {
+variable Duration {
    type discrete[2] {0, 1};
 }
 
@@ -75,10 +79,6 @@ variable LiablePeople {
 }
 
 variable ForeignWorker {
-   type discrete[2] {0, 1};
-}
-
-variable Telephone {
    type discrete[2] {0, 1};
 }
 
@@ -136,6 +136,12 @@ probability (Income | EmploymentSince, Job) {
    (0, 1) 0 0;
    (1, 1) 0 0;
 }
+probability (ResidenceSince | Housing, Age) {
+   (0, 0) 0 0;
+   (1, 0) 0 0;
+   (0, 1) 0 0;
+   (1, 1) 0 0;
+}
 probability (CreditHistory | ExistingCredits, OtherInstallmentPlans) {
    (0, 0) 0 0;
    (1, 0) 0 0;
@@ -152,10 +158,10 @@ probability (OtherDebtors | Age) {
    (0) 0 0;
    (1) 0 0;
 }
-probability (LoanAmount) {
+probability (CreditAmount) {
    table 0 0;
 }
-probability (LoanDuration) {
+probability (Duration) {
    table 0 0;
 }
 probability (InstallmentRate) {
@@ -178,9 +184,6 @@ probability (LiablePeople | PersonalStatusSex) {
 probability (ForeignWorker) {
    table 0 0;
 }
-probability (Telephone) {
-   table 0 0;
-}
 probability (Capacity | Income, ExistingCredits, OtherDebtors, LiablePeople) {
    (0, 0, 0, 0) 0 0;
    (1, 0, 0, 0) 0 0;
@@ -199,23 +202,39 @@ probability (Capacity | Income, ExistingCredits, OtherDebtors, LiablePeople) {
    (0, 1, 1, 1) 0 0;
    (1, 1, 1, 1) 0 0;
 }
-probability (Character | CreditHistory, EmploymentSince, OtherInstallmentPlans, Purpose) {
-   (0, 0, 0, 0) 0 0;
-   (1, 0, 0, 0) 0 0;
-   (0, 1, 0, 0) 0 0;
-   (1, 1, 0, 0) 0 0;
-   (0, 0, 1, 0) 0 0;
-   (1, 0, 1, 0) 0 0;
-   (0, 1, 1, 0) 0 0;
-   (1, 1, 1, 0) 0 0;
-   (0, 0, 0, 1) 0 0;
-   (1, 0, 0, 1) 0 0;
-   (0, 1, 0, 1) 0 0;
-   (1, 1, 0, 1) 0 0;
-   (0, 0, 1, 1) 0 0;
-   (1, 0, 1, 1) 0 0;
-   (0, 1, 1, 1) 0 0;
-   (1, 1, 1, 1) 0 0;
+probability (Character | CreditHistory, EmploymentSince, ResidenceSince, OtherInstallmentPlans, Purpose) {
+   (0, 0, 0, 0, 0) 0 0;
+   (1, 0, 0, 0, 0) 0 0;
+   (0, 1, 0, 0, 0) 0 0;
+   (1, 1, 0, 0, 0) 0 0;
+   (0, 0, 1, 0, 0) 0 0;
+   (1, 0, 1, 0, 0) 0 0;
+   (0, 1, 1, 0, 0) 0 0;
+   (1, 1, 1, 0, 0) 0 0;
+   (0, 0, 0, 1, 0) 0 0;
+   (1, 0, 0, 1, 0) 0 0;
+   (0, 1, 0, 1, 0) 0 0;
+   (1, 1, 0, 1, 0) 0 0;
+   (0, 0, 1, 1, 0) 0 0;
+   (1, 0, 1, 1, 0) 0 0;
+   (0, 1, 1, 1, 0) 0 0;
+   (1, 1, 1, 1, 0) 0 0;
+   (0, 0, 0, 0, 1) 0 0;
+   (1, 0, 0, 0, 1) 0 0;
+   (0, 1, 0, 0, 1) 0 0;
+   (1, 1, 0, 0, 1) 0 0;
+   (0, 0, 1, 0, 1) 0 0;
+   (1, 0, 1, 0, 1) 0 0;
+   (0, 1, 1, 0, 1) 0 0;
+   (1, 1, 1, 0, 1) 0 0;
+   (0, 0, 0, 1, 1) 0 0;
+   (1, 0, 0, 1, 1) 0 0;
+   (0, 1, 0, 1, 1) 0 0;
+   (1, 1, 0, 1, 1) 0 0;
+   (0, 0, 1, 1, 1) 0 0;
+   (1, 0, 1, 1, 1) 0 0;
+   (0, 1, 1, 1, 1) 0 0;
+   (1, 1, 1, 1, 1) 0 0;
 }
 probability (Capital | CheckingAccount, SavingsAccount, Housing) {
    (0, 0, 0) 0 0;
@@ -233,7 +252,7 @@ probability (Collateral | Property, Housing) {
    (0, 1) 0 0;
    (1, 1) 0 0;
 }
-probability (Terms | LoanAmount, LoanDuration, InstallmentRate) {
+probability (Terms | CreditAmount, Duration, InstallmentRate) {
    (0, 0, 0) 0 0;
    (1, 0, 0) 0 0;
    (0, 1, 0) 0 0;

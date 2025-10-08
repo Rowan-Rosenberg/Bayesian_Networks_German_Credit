@@ -4,9 +4,9 @@ bn = gum.BayesNet('GermanCreditManualBN')
 
 nodes = [
     "CheckingAccount", "SavingsAccount", "Property", "Housing",
-    "EmploymentSince", "Job", "Income",
+    "EmploymentSince", "Job", "Income", "ResidenceSince",
     "CreditHistory", "ExistingCredits", "OtherInstallmentPlans", "OtherDebtors",
-    "LoanAmount", "LoanDuration", "InstallmentRate", "Purpose",
+    "CreditAmount", "Duration", "InstallmentRate", "Purpose",
     "Age", "PersonalStatusSex", "LiablePeople", "ForeignWorker",
     "Capacity", "Character", "Capital", "Collateral", "Terms",
     "CreditRisk"
@@ -20,12 +20,14 @@ bn.addArcs([
     ("CheckingAccount", "Capital"),
     ("SavingsAccount", "Capital"),
     ("Housing", "Capital"),
+    ("Housing", "ResidenceSince"),
     
     ("ExistingCredits", "CreditHistory"),
     ("OtherInstallmentPlans", "CreditHistory"),
     
     ("CreditHistory", "Character"),
     ("EmploymentSince", "Character"),
+    ("ResidenceSince", "Character"),
     ("OtherInstallmentPlans", "Character"),
     ("Purpose", "Character"),
 
@@ -41,12 +43,13 @@ bn.addArcs([
     ("LiablePeople", "Capacity"),
 
 
-    ("LoanAmount", "Terms"),
-    ("LoanDuration", "Terms"),
+    ("CreditAmount", "Terms"),
+    ("Duration", "Terms"),
     ("InstallmentRate", "Terms"),
     
 
     ("Age", "EmploymentSince"),
+    ("Age", "ResidenceSince"),
     ("Age", "PersonalStatusSex"),
     ("Age", "OtherDebtors"),
     ("Age", "Job"),
