@@ -1,0 +1,280 @@
+network "GermanCreditManualBN" {
+// written by aGrUM 2.2.1
+}
+
+variable CheckingAccount {
+   type discrete[2] {0, 1};
+}
+
+variable SavingsAccount {
+   type discrete[2] {0, 1};
+}
+
+variable Property {
+   type discrete[2] {0, 1};
+}
+
+variable Housing {
+   type discrete[2] {0, 1};
+}
+
+variable EmploymentSince {
+   type discrete[2] {0, 1};
+}
+
+variable Job {
+   type discrete[2] {0, 1};
+}
+
+variable Income {
+   type discrete[2] {0, 1};
+}
+
+variable CreditHistory {
+   type discrete[2] {0, 1};
+}
+
+variable ExistingCredits {
+   type discrete[2] {0, 1};
+}
+
+variable OtherInstallmentPlans {
+   type discrete[2] {0, 1};
+}
+
+variable OtherDebtors {
+   type discrete[2] {0, 1};
+}
+
+variable LoanAmount {
+   type discrete[2] {0, 1};
+}
+
+variable LoanDuration {
+   type discrete[2] {0, 1};
+}
+
+variable InstallmentRate {
+   type discrete[2] {0, 1};
+}
+
+variable Purpose {
+   type discrete[2] {0, 1};
+}
+
+variable Age {
+   type discrete[2] {0, 1};
+}
+
+variable PersonalStatusSex {
+   type discrete[2] {0, 1};
+}
+
+variable LiablePeople {
+   type discrete[2] {0, 1};
+}
+
+variable ForeignWorker {
+   type discrete[2] {0, 1};
+}
+
+variable Telephone {
+   type discrete[2] {0, 1};
+}
+
+variable Capacity {
+   type discrete[2] {0, 1};
+}
+
+variable Character {
+   type discrete[2] {0, 1};
+}
+
+variable Capital {
+   type discrete[2] {0, 1};
+}
+
+variable Collateral {
+   type discrete[2] {0, 1};
+}
+
+variable Terms {
+   type discrete[2] {0, 1};
+}
+
+variable CreditRisk {
+   type discrete[2] {0, 1};
+}
+
+probability (CheckingAccount | Income) {
+   (0) 0 0;
+   (1) 0 0;
+}
+probability (SavingsAccount | Income) {
+   (0) 0 0;
+   (1) 0 0;
+}
+probability (Property) {
+   table 0 0;
+}
+probability (Housing) {
+   table 0 0;
+}
+probability (EmploymentSince | Age) {
+   (0) 0 0;
+   (1) 0 0;
+}
+probability (Job | Age, ForeignWorker) {
+   (0, 0) 0 0;
+   (1, 0) 0 0;
+   (0, 1) 0 0;
+   (1, 1) 0 0;
+}
+probability (Income | EmploymentSince, Job) {
+   (0, 0) 0 0;
+   (1, 0) 0 0;
+   (0, 1) 0 0;
+   (1, 1) 0 0;
+}
+probability (CreditHistory | ExistingCredits, OtherInstallmentPlans) {
+   (0, 0) 0 0;
+   (1, 0) 0 0;
+   (0, 1) 0 0;
+   (1, 1) 0 0;
+}
+probability (ExistingCredits) {
+   table 0 0;
+}
+probability (OtherInstallmentPlans) {
+   table 0 0;
+}
+probability (OtherDebtors | Age) {
+   (0) 0 0;
+   (1) 0 0;
+}
+probability (LoanAmount) {
+   table 0 0;
+}
+probability (LoanDuration) {
+   table 0 0;
+}
+probability (InstallmentRate) {
+   table 0 0;
+}
+probability (Purpose) {
+   table 0 0;
+}
+probability (Age) {
+   table 0 0;
+}
+probability (PersonalStatusSex | Age) {
+   (0) 0 0;
+   (1) 0 0;
+}
+probability (LiablePeople | PersonalStatusSex) {
+   (0) 0 0;
+   (1) 0 0;
+}
+probability (ForeignWorker) {
+   table 0 0;
+}
+probability (Telephone) {
+   table 0 0;
+}
+probability (Capacity | Income, ExistingCredits, OtherDebtors, LiablePeople) {
+   (0, 0, 0, 0) 0 0;
+   (1, 0, 0, 0) 0 0;
+   (0, 1, 0, 0) 0 0;
+   (1, 1, 0, 0) 0 0;
+   (0, 0, 1, 0) 0 0;
+   (1, 0, 1, 0) 0 0;
+   (0, 1, 1, 0) 0 0;
+   (1, 1, 1, 0) 0 0;
+   (0, 0, 0, 1) 0 0;
+   (1, 0, 0, 1) 0 0;
+   (0, 1, 0, 1) 0 0;
+   (1, 1, 0, 1) 0 0;
+   (0, 0, 1, 1) 0 0;
+   (1, 0, 1, 1) 0 0;
+   (0, 1, 1, 1) 0 0;
+   (1, 1, 1, 1) 0 0;
+}
+probability (Character | CreditHistory, EmploymentSince, OtherInstallmentPlans, Purpose) {
+   (0, 0, 0, 0) 0 0;
+   (1, 0, 0, 0) 0 0;
+   (0, 1, 0, 0) 0 0;
+   (1, 1, 0, 0) 0 0;
+   (0, 0, 1, 0) 0 0;
+   (1, 0, 1, 0) 0 0;
+   (0, 1, 1, 0) 0 0;
+   (1, 1, 1, 0) 0 0;
+   (0, 0, 0, 1) 0 0;
+   (1, 0, 0, 1) 0 0;
+   (0, 1, 0, 1) 0 0;
+   (1, 1, 0, 1) 0 0;
+   (0, 0, 1, 1) 0 0;
+   (1, 0, 1, 1) 0 0;
+   (0, 1, 1, 1) 0 0;
+   (1, 1, 1, 1) 0 0;
+}
+probability (Capital | CheckingAccount, SavingsAccount, Housing) {
+   (0, 0, 0) 0 0;
+   (1, 0, 0) 0 0;
+   (0, 1, 0) 0 0;
+   (1, 1, 0) 0 0;
+   (0, 0, 1) 0 0;
+   (1, 0, 1) 0 0;
+   (0, 1, 1) 0 0;
+   (1, 1, 1) 0 0;
+}
+probability (Collateral | Property, Housing) {
+   (0, 0) 0 0;
+   (1, 0) 0 0;
+   (0, 1) 0 0;
+   (1, 1) 0 0;
+}
+probability (Terms | LoanAmount, LoanDuration, InstallmentRate) {
+   (0, 0, 0) 0 0;
+   (1, 0, 0) 0 0;
+   (0, 1, 0) 0 0;
+   (1, 1, 0) 0 0;
+   (0, 0, 1) 0 0;
+   (1, 0, 1) 0 0;
+   (0, 1, 1) 0 0;
+   (1, 1, 1) 0 0;
+}
+probability (CreditRisk | Character, Capacity, Capital, Collateral, Terms) {
+   (0, 0, 0, 0, 0) 0 0;
+   (1, 0, 0, 0, 0) 0 0;
+   (0, 1, 0, 0, 0) 0 0;
+   (1, 1, 0, 0, 0) 0 0;
+   (0, 0, 1, 0, 0) 0 0;
+   (1, 0, 1, 0, 0) 0 0;
+   (0, 1, 1, 0, 0) 0 0;
+   (1, 1, 1, 0, 0) 0 0;
+   (0, 0, 0, 1, 0) 0 0;
+   (1, 0, 0, 1, 0) 0 0;
+   (0, 1, 0, 1, 0) 0 0;
+   (1, 1, 0, 1, 0) 0 0;
+   (0, 0, 1, 1, 0) 0 0;
+   (1, 0, 1, 1, 0) 0 0;
+   (0, 1, 1, 1, 0) 0 0;
+   (1, 1, 1, 1, 0) 0 0;
+   (0, 0, 0, 0, 1) 0 0;
+   (1, 0, 0, 0, 1) 0 0;
+   (0, 1, 0, 0, 1) 0 0;
+   (1, 1, 0, 0, 1) 0 0;
+   (0, 0, 1, 0, 1) 0 0;
+   (1, 0, 1, 0, 1) 0 0;
+   (0, 1, 1, 0, 1) 0 0;
+   (1, 1, 1, 0, 1) 0 0;
+   (0, 0, 0, 1, 1) 0 0;
+   (1, 0, 0, 1, 1) 0 0;
+   (0, 1, 0, 1, 1) 0 0;
+   (1, 1, 0, 1, 1) 0 0;
+   (0, 0, 1, 1, 1) 0 0;
+   (1, 0, 1, 1, 1) 0 0;
+   (0, 1, 1, 1, 1) 0 0;
+   (1, 1, 1, 1, 1) 0 0;
+}
+
