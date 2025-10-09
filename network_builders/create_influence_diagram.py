@@ -30,51 +30,13 @@ def create_credit_influence_diagram(bn_path: str):
     for node_name in bn.names():
         id.cpt(node_name).fillWith(bn.cpt(node_name))
 
-
     # Decision Node: whether to approve or reject the loan
     decision_name = "ApproveLoan"
     decision_node = gum.LabelizedVariable(decision_name, "Approve or reject the loan", 2)
     decision_node.changeLabel(0, "Approve")
     decision_node.changeLabel(1, "Reject")
     id.addDecisionNode(decision_node)
-
-    # Get Markov Blanket of CreditRisk
-    # MB = parents + children + co-parents (parents of children)
-    target_name = "CreditRisk"
-    target_id = bn.idFromName(target_name)
-
-    markov_blanket = set()
     
-    # 1. Add parents of CreditRisk
-    for parent_id in bn.parents(target_id):
-        markov_blanket.add(bn.variable(parent_id).name())
-    
-    # 2. Add children of CreditRisk
-    for child_id in bn.children(target_id):
-        markov_blanket.add(bn.variable(child_id).name())
-    
-    # 3. Add co-parents (parents of children, excluding CreditRisk itself)
-    for child_id in bn.children(target_id):
-        for coparent_id in bn.parents(child_id):
-            if coparent_id != target_id:
-                markov_blanket.add(bn.variable(coparent_id).name())
-    
-    print(f"\nMarkov Blanket of '{target_name}':")
-    print(f"  - Parents: {[bn.variable(p).name() for p in bn.parents(target_id)]}")
-    print(f"  - Children: {[bn.variable(c).name() for c in bn.children(target_id)]}")
-    
-    coparents = set()
-    for child_id in bn.children(target_id):
-        for coparent_id in bn.parents(child_id):
-            if coparent_id != target_id:
-                coparents.add(bn.variable(coparent_id).name())
-    print(f"  - Co-parents: {list(coparents)}")
-    print(f"  - Total MB nodes: {sorted(markov_blanket)}")
-    
-    # Connect Markov Blanket nodes to decision node
-    for informant in markov_blanket:
-        id.addArc(informant, decision_name)
-
     # Define Utility Node
     utility_name = "Utility"
     utility_node = gum.LabelizedVariable(utility_name, "Financial outcome of decision", 1)
