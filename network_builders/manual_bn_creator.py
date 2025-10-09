@@ -14,7 +14,7 @@ def build_fast_var_string(series, var_name):
         int_vals = [int(v) for v in unique_vals]
         vals_str = '|'.join(str(v) for v in sorted(int_vals))
         result = f"{var_name}{{{vals_str}}}"
-        # print(f"Integer values detected for {var_name}: {result}")
+        print(f"Integer values detected for {var_name}: {result}")
         return result
     except (ValueError, TypeError):
         pass
