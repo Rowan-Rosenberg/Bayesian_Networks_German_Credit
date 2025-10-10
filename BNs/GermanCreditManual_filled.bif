@@ -1,81 +1,17 @@
-network "GermanCreditManualBN" {
+network ""GermanCreditManualBN"" {
 // written by aGrUM 2.2.1
 }
 
-variable PersonalStatusSex {
-   type discrete[4] {female_divorced_separated_married, male_divorced_separated, male_married_widowed, male_single};
-}
-
-variable LiablePeople {
-   type discrete[2] {1, 2};
-}
-
-variable SavingsAccount {
-   type discrete[5] {_100to500_DM, _500to1000_DM, ge1000_DM, lt100_DM, unknown__no_savings};
-}
-
-variable ExistingCredits {
-   type discrete[4] {1, 2, 3, 4};
-}
-
-variable Housing {
-   type discrete[3] {for_free, own, rent};
-}
-
-variable Collateral {
-   type discrete[3] {none, some, good};
-}
-
-variable Property {
-   type discrete[4] {building_society_savings__life_insurance, car_or_other, real_estate, unknown__no_property};
-}
-
-variable InstallmentRate {
-   type discrete[4] {1, 2, 3, 4};
-}
-
-variable OtherDebtors {
-   type discrete[3] {co_applicant, guarantor, none};
-}
-
-variable Terms {
-   type discrete[3] {short, medium, long};
-}
-
-variable Income {
-   type discrete[3] {low, medium, high};
-}
-
-variable CreditHistory {
-   type discrete[5] {All_credits_at_this_bank_paid_duly, Critical_account__other_credits_elsewhere, Delay_in_paying_off_in_the_past, Existing_credits_paid_duly_till_now, No_credits_taken__all_paid_duly};
-}
-
-variable ResidenceSince {
-   type discrete[4] {1, 2, 3, 4};
-}
-
-variable Character {
-   type discrete[2] {bad, good};
-}
-
-variable Capital {
-   type discrete[3] {low, medium, high};
-}
-
-variable OtherInstallmentPlans {
-   type discrete[3] {bank, none, stores};
+variable CreditAmount {
+   type discrete[3] {High, Low, Medium};
 }
 
 variable ForeignWorker {
    type discrete[2] {no, yes};
 }
 
-variable Purpose {
-   type discrete[10] {business, car_new, car_used, domestic_appliances, education, furniture_equipment, others, radio_television, repairs, retraining};
-}
-
-variable CheckingAccount {
-   type discrete[4] {_0to200, No_Checking, ge200, lt0};
+variable OtherDebtors {
+   type discrete[3] {co_applicant, guarantor, none};
 }
 
 variable CreditRisk {
@@ -86,157 +22,341 @@ variable Capacity {
    type discrete[3] {low, medium, high};
 }
 
-variable Duration {
-   type discrete[3] {Long, Medium, Short};
+variable ExistingCredits {
+   type discrete[4] {1, 2, 3, 4};
+}
+
+variable Character {
+   type discrete[2] {bad, good};
+}
+
+variable Income {
+   type discrete[3] {low, medium, high};
 }
 
 variable Job {
    type discrete[4] {management_self_employed_highly_qualified_officer, skilled_employee_official, unemployed_unskilled__non_resident, unskilled__resident};
 }
 
+variable Purpose {
+   type discrete[10] {business, car_new, car_used, domestic_appliances, education, furniture_equipment, others, radio_television, repairs, retraining};
+}
+
+variable PersonalStatusSex {
+   type discrete[4] {female_divorced_separated_married, male_divorced_separated, male_married_widowed, male_single};
+}
+
+variable CreditHistory {
+   type discrete[5] {All_credits_at_this_bank_paid_duly, Critical_account__other_credits_elsewhere, Delay_in_paying_off_in_the_past, Existing_credits_paid_duly_till_now, No_credits_taken__all_paid_duly};
+}
+
+variable Capital {
+   type discrete[3] {low, medium, high};
+}
+
+variable Collateral {
+   type discrete[3] {none, some, good};
+}
+
+variable Property {
+   type discrete[4] {building_society_savings__life_insurance, car_or_other, real_estate, unknown__no_property};
+}
+
 variable EmploymentSince {
    type discrete[5] {_1to4_years, _4to7_years, ge7_years, lt1_year, unemployed};
+}
+
+variable Terms {
+   type discrete[3] {short, medium, long};
+}
+
+variable ResidenceSince {
+   type discrete[4] {1, 2, 3, 4};
+}
+
+variable InstallmentRate {
+   type discrete[4] {1, 2, 3, 4};
+}
+
+variable OtherInstallmentPlans {
+   type discrete[3] {bank, none, stores};
+}
+
+variable Housing {
+   type discrete[3] {for_free, own, rent};
+}
+
+variable CheckingAccount {
+   type discrete[4] {_0to200, No_Checking, ge200, lt0};
 }
 
 variable Age {
    type discrete[3] {Middle, Old, Young};
 }
 
-variable CreditAmount {
-   type discrete[3] {High, Low, Medium};
+variable Duration {
+   type discrete[3] {Long, Medium, Short};
 }
 
-probability (PersonalStatusSex | Age) {
-   (Middle) 0.2 0.0678571 0.0642857 0.667857;
-   (Old) 0.319444 0.0694444 0.0277778 0.583333;
-   (Young) 0.354545 0.0439394 0.113636 0.487879;
+variable LiablePeople {
+   type discrete[2] {1, 2};
 }
-probability (LiablePeople | PersonalStatusSex) {
-   (female_divorced_separated_married) 0.951923 0.0480769;
-   (male_divorced_separated) 0.923077 0.0769231;
-   (male_married_widowed) 0.968085 0.0319149;
-   (male_single) 0.750909 0.249091;
+
+variable SavingsAccount {
+   type discrete[5] {_100to500_DM, _500to1000_DM, ge1000_DM, lt100_DM, unknown__no_savings};
 }
-probability (SavingsAccount | Income) {
-   (low) 0.0769231 0.0288462 0.0769231 0.615385 0.201923;
-   (medium) 0.0877743 0.0658307 0.0595611 0.579937 0.206897;
-   (high) 0.118243 0.0709459 0.0405405 0.603041 0.16723;
+
+probability (CreditAmount) {
+   table 0.0199402 0.86341 0.11665;
 }
-probability (ExistingCredits) {
-   table 0.631474 0.332669 0.0288845 0.00697211;
-}
-probability (Housing) {
-   table 0.108674 0.711864 0.179462;
-}
-probability (Collateral | Property, Housing) {
-   (building_society_savings__life_insurance, for_free) 0.6 0.2 0.2;
-   (car_or_other, for_free) 0.5 0.25 0.25;
-   (real_estate, for_free) 0.5 0.25 0.25;
-   (unknown__no_property, for_free) 0.738318 0.186916 0.0747664;
-   (building_society_savings__life_insurance, own) 0.716578 0.176471 0.106952;
-   (car_or_other, own) 0.664234 0.215328 0.120438;
-   (real_estate, own) 0.668122 0.196507 0.135371;
-   (unknown__no_property, own) 0.8 0.142857 0.0571429;
-   (building_society_savings__life_insurance, rent) 0.632653 0.22449 0.142857;
-   (car_or_other, rent) 0.809524 0.111111 0.0793651;
-   (real_estate, rent) 0.741379 0.12069 0.137931;
-   (unknown__no_property, rent) 0.571429 0.285714 0.142857;
-}
-probability (Property) {
-   table 0.232072 0.331673 0.281873 0.154382;
-}
-probability (InstallmentRate) {
-   table 0.136454 0.231076 0.157371 0.4751;
+probability (ForeignWorker) {
+   table 0.0379242 0.962076;
 }
 probability (OtherDebtors | Age) {
    (Middle) 0.046595 0.0501792 0.903226;
    (Old) 0.0422535 0.056338 0.901408;
    (Young) 0.0424886 0.0561457 0.901366;
 }
-probability (Terms | CreditAmount, Duration, InstallmentRate) {
-   (High, Long, 1) 0.333333 0.333333 0.333333;
-   (Low, Long, 1) 0.333333 0.333333 0.333333;
-   (Medium, Long, 1) 0.25 0.25 0.5;
-   (High, Medium, 1) 0.333333 0.333333 0.333333;
-   (Low, Medium, 1) 0.4 0.2 0.4;
-   (Medium, Medium, 1) 0.25 0.375 0.375;
-   (High, Short, 1) 0.2 0.4 0.4;
-   (Low, Short, 1) 0.237624 0.39604 0.366337;
-   (Medium, Short, 1) 0.2 0.533333 0.266667;
-   (High, Long, 2) 0.2 0.4 0.4;
-   (Low, Long, 2) 0.25 0.5 0.25;
-   (Medium, Long, 2) 0.428571 0.285714 0.285714;
-   (High, Medium, 2) 0.333333 0.5 0.166667;
-   (Low, Medium, 2) 0.103448 0.310345 0.586207;
-   (Medium, Medium, 2) 0.241379 0.344828 0.413793;
-   (High, Short, 2) 0.333333 0.333333 0.333333;
-   (Low, Short, 2) 0.275641 0.275641 0.448718;
-   (Medium, Short, 2) 0.210526 0.473684 0.315789;
-   (High, Long, 3) 0.4 0.4 0.2;
-   (Low, Long, 3) 0.333333 0.333333 0.333333;
-   (Medium, Long, 3) 0.5 0.25 0.25;
-   (High, Medium, 3) 0.333333 0.333333 0.333333;
-   (Low, Medium, 3) 0.190476 0.333333 0.47619;
-   (Medium, Medium, 3) 0.142857 0.357143 0.5;
-   (High, Short, 3) 0.25 0.25 0.5;
-   (Low, Short, 3) 0.225806 0.298387 0.475806;
-   (Medium, Short, 3) 0.333333 0.333333 0.333333;
-   (High, Long, 4) 0.25 0.5 0.25;
-   (Low, Long, 4) 0.5 0.25 0.25;
-   (Medium, Long, 4) 0.333333 0.333333 0.333333;
-   (High, Medium, 4) 0.166667 0.5 0.333333;
-   (Low, Medium, 4) 0.211765 0.376471 0.411765;
-   (Medium, Medium, 4) 0.291667 0.333333 0.375;
-   (High, Short, 4) 0.2 0.4 0.4;
-   (Low, Short, 4) 0.213296 0.32133 0.465374;
-   (Medium, Short, 4) 0.375 0.375 0.25;
+probability (CreditRisk | Character, Capacity, Capital, Collateral, Terms) {
+   (bad, low, low, none, short) 0.166667 0.833333;
+   (good, low, low, none, short) 0.367347 0.632653;
+   (bad, medium, low, none, short) 0.2 0.8;
+   (good, medium, low, none, short) 0.233766 0.766234;
+   (bad, high, low, none, short) 0.26087 0.73913;
+   (good, high, low, none, short) 0.375 0.625;
+   (bad, low, medium, none, short) 0.4 0.6;
+   (good, low, medium, none, short) 0.210526 0.789474;
+   (bad, medium, medium, none, short) 0.333333 0.666667;
+   (good, medium, medium, none, short) 0.333333 0.666667;
+   (bad, high, medium, none, short) 0.428571 0.571429;
+   (good, high, medium, none, short) 0.3125 0.6875;
+   (bad, low, high, none, short) 0.5 0.5;
+   (good, low, high, none, short) 0.444444 0.555556;
+   (bad, medium, high, none, short) 0.5 0.5;
+   (good, medium, high, none, short) 0.25 0.75;
+   (bad, high, high, none, short) 0.5 0.5;
+   (good, high, high, none, short) 0.0909091 0.909091;
+   (bad, low, low, some, short) 0.333333 0.666667;
+   (good, low, low, some, short) 0.304348 0.695652;
+   (bad, medium, low, some, short) 0.428571 0.571429;
+   (good, medium, low, some, short) 0.444444 0.555556;
+   (bad, high, low, some, short) 0.5 0.5;
+   (good, high, low, some, short) 0.333333 0.666667;
+   (bad, low, medium, some, short) 0.5 0.5;
+   (good, low, medium, some, short) 0.416667 0.583333;
+   (bad, medium, medium, some, short) 0.5 0.5;
+   (good, medium, medium, some, short) 0.25 0.75;
+   (bad, high, medium, some, short) 0.5 0.5;
+   (good, high, medium, some, short) 0.428571 0.571429;
+   (bad, low, high, some, short) 0.5 0.5;
+   (good, low, high, some, short) 0.333333 0.666667;
+   (bad, medium, high, some, short) 0.4 0.6;
+   (good, medium, high, some, short) 0.4 0.6;
+   (bad, high, high, some, short) 0.5 0.5;
+   (good, high, high, some, short) 0.5 0.5;
+   (bad, low, low, good, short) 0.666667 0.333333;
+   (good, low, low, good, short) 0.222222 0.777778;
+   (bad, medium, low, good, short) 0.333333 0.666667;
+   (good, medium, low, good, short) 0.235294 0.764706;
+   (bad, high, low, good, short) 0.333333 0.666667;
+   (good, high, low, good, short) 0.5 0.5;
+   (bad, low, medium, good, short) 0.5 0.5;
+   (good, low, medium, good, short) 0.5 0.5;
+   (bad, medium, medium, good, short) 0.333333 0.666667;
+   (good, medium, medium, good, short) 0.25 0.75;
+   (bad, high, medium, good, short) 0.25 0.75;
+   (good, high, medium, good, short) 0.333333 0.666667;
+   (bad, low, high, good, short) 0.5 0.5;
+   (good, low, high, good, short) 0.5 0.5;
+   (bad, medium, high, good, short) 0.333333 0.666667;
+   (good, medium, high, good, short) 0.333333 0.666667;
+   (bad, high, high, good, short) 0.5 0.5;
+   (good, high, high, good, short) 0.4 0.6;
+   (bad, low, low, none, medium) 0.5 0.5;
+   (good, low, low, none, medium) 0.282609 0.717391;
+   (bad, medium, low, none, medium) 0.285714 0.714286;
+   (good, medium, low, none, medium) 0.4375 0.5625;
+   (bad, high, low, none, medium) 0.166667 0.833333;
+   (good, high, low, none, medium) 0.245283 0.754717;
+   (bad, low, medium, none, medium) 0.444444 0.555556;
+   (good, low, medium, none, medium) 0.461538 0.538462;
+   (bad, medium, medium, none, medium) 0.333333 0.666667;
+   (good, medium, medium, none, medium) 0.333333 0.666667;
+   (bad, high, medium, none, medium) 0.333333 0.666667;
+   (good, high, medium, none, medium) 0.357143 0.642857;
+   (bad, low, high, none, medium) 0.5 0.5;
+   (good, low, high, none, medium) 0.2 0.8;
+   (bad, medium, high, none, medium) 0.5 0.5;
+   (good, medium, high, none, medium) 0.363636 0.636364;
+   (bad, high, high, none, medium) 0.2 0.8;
+   (good, high, high, none, medium) 0.222222 0.777778;
+   (bad, low, low, some, medium) 0.4 0.6;
+   (good, low, low, some, medium) 0.363636 0.636364;
+   (bad, medium, low, some, medium) 0.333333 0.666667;
+   (good, medium, low, some, medium) 0.352941 0.647059;
+   (bad, high, low, some, medium) 0.5 0.5;
+   (good, high, low, some, medium) 0.333333 0.666667;
+   (bad, low, medium, some, medium) 0.333333 0.666667;
+   (good, low, medium, some, medium) 0.2 0.8;
+   (bad, medium, medium, some, medium) 0.25 0.75;
+   (good, medium, medium, some, medium) 0.428571 0.571429;
+   (bad, high, medium, some, medium) 0.333333 0.666667;
+   (good, high, medium, some, medium) 0.333333 0.666667;
+   (bad, low, high, some, medium) 0.333333 0.666667;
+   (good, low, high, some, medium) 0.5 0.5;
+   (bad, medium, high, some, medium) 0.5 0.5;
+   (good, medium, high, some, medium) 0.333333 0.666667;
+   (bad, high, high, some, medium) 0.333333 0.666667;
+   (good, high, high, some, medium) 0.333333 0.666667;
+   (bad, low, low, good, medium) 0.333333 0.666667;
+   (good, low, low, good, medium) 0.333333 0.666667;
+   (bad, medium, low, good, medium) 0.333333 0.666667;
+   (good, medium, low, good, medium) 0.545455 0.454545;
+   (bad, high, low, good, medium) 0.4 0.6;
+   (good, high, low, good, medium) 0.375 0.625;
+   (bad, low, medium, good, medium) 0.333333 0.666667;
+   (good, low, medium, good, medium) 0.5 0.5;
+   (bad, medium, medium, good, medium) 0.5 0.5;
+   (good, medium, medium, good, medium) 0.5 0.5;
+   (bad, high, medium, good, medium) 0.5 0.5;
+   (good, high, medium, good, medium) 0.666667 0.333333;
+   (bad, low, high, good, medium) 0.5 0.5;
+   (good, low, high, good, medium) 0.5 0.5;
+   (bad, medium, high, good, medium) 0.333333 0.666667;
+   (good, medium, high, good, medium) 0.5 0.5;
+   (bad, high, high, good, medium) 0.5 0.5;
+   (good, high, high, good, medium) 0.5 0.5;
+   (bad, low, low, none, long) 0.4 0.6;
+   (good, low, low, none, long) 0.321429 0.678571;
+   (bad, medium, low, none, long) 0.375 0.625;
+   (good, medium, low, none, long) 0.272727 0.727273;
+   (bad, high, low, none, long) 0.333333 0.666667;
+   (good, high, low, none, long) 0.454545 0.545455;
+   (bad, low, medium, none, long) 0.5 0.5;
+   (good, low, medium, none, long) 0.444444 0.555556;
+   (bad, medium, medium, none, long) 0.333333 0.666667;
+   (good, medium, medium, none, long) 0.333333 0.666667;
+   (bad, high, medium, none, long) 0.5 0.5;
+   (good, high, medium, none, long) 0.444444 0.555556;
+   (bad, low, high, none, long) 0.666667 0.333333;
+   (good, low, high, none, long) 0.2 0.8;
+   (bad, medium, high, none, long) 0.333333 0.666667;
+   (good, medium, high, none, long) 0.25 0.75;
+   (bad, high, high, none, long) 0.5 0.5;
+   (good, high, high, none, long) 0.222222 0.777778;
+   (bad, low, low, some, long) 0.25 0.75;
+   (good, low, low, some, long) 0.375 0.625;
+   (bad, medium, low, some, long) 0.75 0.25;
+   (good, medium, low, some, long) 0.5 0.5;
+   (bad, high, low, some, long) 0.666667 0.333333;
+   (good, high, low, some, long) 0.25 0.75;
+   (bad, low, medium, some, long) 0.5 0.5;
+   (good, low, medium, some, long) 0.5 0.5;
+   (bad, medium, medium, some, long) 0.5 0.5;
+   (good, medium, medium, some, long) 0.4 0.6;
+   (bad, high, medium, some, long) 0.333333 0.666667;
+   (good, high, medium, some, long) 0.4 0.6;
+   (bad, low, high, some, long) 0.5 0.5;
+   (good, low, high, some, long) 0.666667 0.333333;
+   (bad, medium, high, some, long) 0.5 0.5;
+   (good, medium, high, some, long) 0.333333 0.666667;
+   (bad, high, high, some, long) 0.5 0.5;
+   (good, high, high, some, long) 0.5 0.5;
+   (bad, low, low, good, long) 0.333333 0.666667;
+   (good, low, low, good, long) 0.25 0.75;
+   (bad, medium, low, good, long) 0.333333 0.666667;
+   (good, medium, low, good, long) 0.2 0.8;
+   (bad, high, low, good, long) 0.25 0.75;
+   (good, high, low, good, long) 0.75 0.25;
+   (bad, low, medium, good, long) 0.333333 0.666667;
+   (good, low, medium, good, long) 0.5 0.5;
+   (bad, medium, medium, good, long) 0.5 0.5;
+   (good, medium, medium, good, long) 0.333333 0.666667;
+   (bad, high, medium, good, long) 0.666667 0.333333;
+   (good, high, medium, good, long) 0.4 0.6;
+   (bad, low, high, good, long) 0.5 0.5;
+   (good, low, high, good, long) 0.5 0.5;
+   (bad, medium, high, good, long) 0.5 0.5;
+   (good, medium, high, good, long) 0.25 0.75;
+   (bad, high, high, good, long) 0.5 0.5;
+   (good, high, high, good, long) 0.5 0.5;
 }
-probability (Income | EmploymentSince, Job) {
-   (_1to4_years, management_self_employed_highly_qualified_officer) 0.129032 0.258065 0.612903;
-   (_4to7_years, management_self_employed_highly_qualified_officer) 0.208333 0.291667 0.5;
-   (ge7_years, management_self_employed_highly_qualified_officer) 0.0566038 0.320755 0.622642;
-   (lt1_year, management_self_employed_highly_qualified_officer) 0.157895 0.421053 0.421053;
-   (unemployed, management_self_employed_highly_qualified_officer) 0.138889 0.305556 0.555556;
-   (_1to4_years, skilled_employee_official) 0.0944206 0.309013 0.596567;
-   (_4to7_years, skilled_employee_official) 0.139344 0.303279 0.557377;
-   (ge7_years, skilled_employee_official) 0.10303 0.375758 0.521212;
-   (lt1_year, skilled_employee_official) 0.1 0.3 0.6;
-   (unemployed, skilled_employee_official) 0.0666667 0.466667 0.466667;
-   (_1to4_years, unemployed_unskilled__non_resident) 0.5 0.25 0.25;
-   (_4to7_years, unemployed_unskilled__non_resident) 0.333333 0.333333 0.333333;
-   (ge7_years, unemployed_unskilled__non_resident) 0.333333 0.333333 0.333333;
-   (lt1_year, unemployed_unskilled__non_resident) 0.125 0.5 0.375;
-   (unemployed, unemployed_unskilled__non_resident) 0.157895 0.315789 0.526316;
-   (_1to4_years, unskilled__resident) 0.0843373 0.325301 0.590361;
-   (_4to7_years, unskilled__resident) 0.135135 0.216216 0.648649;
-   (ge7_years, unskilled__resident) 0.113636 0.340909 0.545455;
-   (lt1_year, unskilled__resident) 0.106383 0.170213 0.723404;
-   (unemployed, unskilled__resident) 0.25 0.25 0.5;
+probability (Capacity | Income, ExistingCredits, OtherDebtors, LiablePeople) {
+   (low, 1, co_applicant, 1) 0.333333 0.333333 0.333333;
+   (medium, 1, co_applicant, 1) 0.4 0.2 0.4;
+   (high, 1, co_applicant, 1) 0.277778 0.5 0.222222;
+   (low, 2, co_applicant, 1) 0.25 0.5 0.25;
+   (medium, 2, co_applicant, 1) 0.166667 0.666667 0.166667;
+   (high, 2, co_applicant, 1) 0.285714 0.428571 0.285714;
+   (low, 3, co_applicant, 1) 0.333333 0.333333 0.333333;
+   (medium, 3, co_applicant, 1) 0.333333 0.333333 0.333333;
+   (high, 3, co_applicant, 1) 0.333333 0.333333 0.333333;
+   (low, 4, co_applicant, 1) 0.333333 0.333333 0.333333;
+   (medium, 4, co_applicant, 1) 0.333333 0.333333 0.333333;
+   (high, 4, co_applicant, 1) 0.333333 0.333333 0.333333;
+   (low, 1, guarantor, 1) 0.5 0.25 0.25;
+   (medium, 1, guarantor, 1) 0.230769 0.307692 0.461538;
+   (high, 1, guarantor, 1) 0.333333 0.277778 0.388889;
+   (low, 2, guarantor, 1) 0.333333 0.333333 0.333333;
+   (medium, 2, guarantor, 1) 0.142857 0.571429 0.285714;
+   (high, 2, guarantor, 1) 0.2 0.5 0.3;
+   (low, 3, guarantor, 1) 0.333333 0.333333 0.333333;
+   (medium, 3, guarantor, 1) 0.333333 0.333333 0.333333;
+   (high, 3, guarantor, 1) 0.5 0.25 0.25;
+   (low, 4, guarantor, 1) 0.333333 0.333333 0.333333;
+   (medium, 4, guarantor, 1) 0.333333 0.333333 0.333333;
+   (high, 4, guarantor, 1) 0.333333 0.333333 0.333333;
+   (low, 1, none, 1) 0.392857 0.25 0.357143;
+   (medium, 1, none, 1) 0.327485 0.426901 0.245614;
+   (high, 1, none, 1) 0.28169 0.390845 0.327465;
+   (low, 2, none, 1) 0.1875 0.5 0.3125;
+   (medium, 2, none, 1) 0.333333 0.348485 0.318182;
+   (high, 2, none, 1) 0.316129 0.412903 0.270968;
+   (low, 3, none, 1) 0.333333 0.333333 0.333333;
+   (medium, 3, none, 1) 0.25 0.625 0.125;
+   (high, 3, none, 1) 0.2 0.266667 0.533333;
+   (low, 4, none, 1) 0.333333 0.333333 0.333333;
+   (medium, 4, none, 1) 0.25 0.25 0.5;
+   (high, 4, none, 1) 0.5 0.166667 0.333333;
+   (low, 1, co_applicant, 2) 0.333333 0.333333 0.333333;
+   (medium, 1, co_applicant, 2) 0.2 0.2 0.6;
+   (high, 1, co_applicant, 2) 0.25 0.5 0.25;
+   (low, 2, co_applicant, 2) 0.333333 0.333333 0.333333;
+   (medium, 2, co_applicant, 2) 0.333333 0.333333 0.333333;
+   (high, 2, co_applicant, 2) 0.25 0.5 0.25;
+   (low, 3, co_applicant, 2) 0.333333 0.333333 0.333333;
+   (medium, 3, co_applicant, 2) 0.333333 0.333333 0.333333;
+   (high, 3, co_applicant, 2) 0.333333 0.333333 0.333333;
+   (low, 4, co_applicant, 2) 0.333333 0.333333 0.333333;
+   (medium, 4, co_applicant, 2) 0.333333 0.333333 0.333333;
+   (high, 4, co_applicant, 2) 0.333333 0.333333 0.333333;
+   (low, 1, guarantor, 2) 0.25 0.5 0.25;
+   (medium, 1, guarantor, 2) 0.666667 0.166667 0.166667;
+   (high, 1, guarantor, 2) 0.375 0.125 0.5;
+   (low, 2, guarantor, 2) 0.333333 0.333333 0.333333;
+   (medium, 2, guarantor, 2) 0.333333 0.333333 0.333333;
+   (high, 2, guarantor, 2) 0.4 0.2 0.4;
+   (low, 3, guarantor, 2) 0.333333 0.333333 0.333333;
+   (medium, 3, guarantor, 2) 0.333333 0.333333 0.333333;
+   (high, 3, guarantor, 2) 0.333333 0.333333 0.333333;
+   (low, 4, guarantor, 2) 0.333333 0.333333 0.333333;
+   (medium, 4, guarantor, 2) 0.333333 0.333333 0.333333;
+   (high, 4, guarantor, 2) 0.333333 0.333333 0.333333;
+   (low, 1, none, 2) 0.333333 0.333333 0.333333;
+   (medium, 1, none, 2) 0.307692 0.423077 0.269231;
+   (high, 1, none, 2) 0.244444 0.355556 0.4;
+   (low, 2, none, 2) 0.166667 0.333333 0.5;
+   (medium, 2, none, 2) 0.318182 0.272727 0.409091;
+   (high, 2, none, 2) 0.315789 0.421053 0.263158;
+   (low, 3, none, 2) 0.2 0.6 0.2;
+   (medium, 3, none, 2) 0.142857 0.285714 0.571429;
+   (high, 3, none, 2) 0.285714 0.285714 0.428571;
+   (low, 4, none, 2) 0.333333 0.333333 0.333333;
+   (medium, 4, none, 2) 0.2 0.4 0.4;
+   (high, 4, none, 2) 0.333333 0.333333 0.333333;
 }
-probability (CreditHistory | ExistingCredits, OtherInstallmentPlans) {
-   (1, bank) 0.238636 0.113636 0.0454545 0.545455 0.0568182;
-   (2, bank) 0.0943396 0.396226 0.188679 0.207547 0.113208;
-   (3, bank) 0.0833333 0.416667 0.0833333 0.25 0.166667;
-   (4, bank) 0.166667 0.166667 0.166667 0.333333 0.166667;
-   (1, none) 0.0265655 0.11575 0.0493359 0.789374 0.0189753;
-   (2, none) 0.018315 0.630037 0.150183 0.131868 0.0695971;
-   (3, none) 0.04 0.76 0.04 0.08 0.08;
-   (4, none) 0.111111 0.333333 0.222222 0.222222 0.111111;
-   (1, stores) 0.272727 0.0606061 0.121212 0.515152 0.030303;
-   (2, stores) 0.0454545 0.363636 0.363636 0.0909091 0.136364;
-   (3, stores) 0.166667 0.166667 0.166667 0.333333 0.166667;
-   (4, stores) 0.166667 0.333333 0.166667 0.166667 0.166667;
-}
-probability (ResidenceSince | Housing, Age) {
-   (for_free, Middle) 0.0377358 0.113208 0.0566038 0.792453;
-   (own, Middle) 0.1133 0.226601 0.172414 0.487685;
-   (rent, Middle) 0.09375 0.3125 0.125 0.46875;
-   (for_free, Old) 0.0454545 0.0909091 0.0909091 0.772727;
-   (own, Old) 0.0434783 0.0652174 0.195652 0.695652;
-   (rent, Old) 0.0833333 0.166667 0.166667 0.583333;
-   (for_free, Young) 0.111111 0.177778 0.0888889 0.622222;
-   (own, Young) 0.193277 0.439076 0.165966 0.201681;
-   (rent, Young) 0.0680272 0.210884 0.136054 0.585034;
+probability (ExistingCredits) {
+   table 0.631474 0.332669 0.0288845 0.00697211;
 }
 probability (Character | CreditHistory, EmploymentSince, ResidenceSince, OtherInstallmentPlans, Purpose) {
    (All_credits_at_this_bank_paid_duly, _1to4_years, 1, bank, business) 0.5 0.5;
@@ -3240,6 +3360,58 @@ probability (Character | CreditHistory, EmploymentSince, ResidenceSince, OtherIn
    (Existing_credits_paid_duly_till_now, unemployed, 4, stores, retraining) 0.5 0.5;
    (No_credits_taken__all_paid_duly, unemployed, 4, stores, retraining) 0.5 0.5;
 }
+probability (Income | EmploymentSince, Job) {
+   (_1to4_years, management_self_employed_highly_qualified_officer) 0.129032 0.258065 0.612903;
+   (_4to7_years, management_self_employed_highly_qualified_officer) 0.208333 0.291667 0.5;
+   (ge7_years, management_self_employed_highly_qualified_officer) 0.0566038 0.320755 0.622642;
+   (lt1_year, management_self_employed_highly_qualified_officer) 0.157895 0.421053 0.421053;
+   (unemployed, management_self_employed_highly_qualified_officer) 0.138889 0.305556 0.555556;
+   (_1to4_years, skilled_employee_official) 0.0944206 0.309013 0.596567;
+   (_4to7_years, skilled_employee_official) 0.139344 0.303279 0.557377;
+   (ge7_years, skilled_employee_official) 0.10303 0.375758 0.521212;
+   (lt1_year, skilled_employee_official) 0.1 0.3 0.6;
+   (unemployed, skilled_employee_official) 0.0666667 0.466667 0.466667;
+   (_1to4_years, unemployed_unskilled__non_resident) 0.5 0.25 0.25;
+   (_4to7_years, unemployed_unskilled__non_resident) 0.333333 0.333333 0.333333;
+   (ge7_years, unemployed_unskilled__non_resident) 0.333333 0.333333 0.333333;
+   (lt1_year, unemployed_unskilled__non_resident) 0.125 0.5 0.375;
+   (unemployed, unemployed_unskilled__non_resident) 0.157895 0.315789 0.526316;
+   (_1to4_years, unskilled__resident) 0.0843373 0.325301 0.590361;
+   (_4to7_years, unskilled__resident) 0.135135 0.216216 0.648649;
+   (ge7_years, unskilled__resident) 0.113636 0.340909 0.545455;
+   (lt1_year, unskilled__resident) 0.106383 0.170213 0.723404;
+   (unemployed, unskilled__resident) 0.25 0.25 0.5;
+}
+probability (Job | Age, ForeignWorker) {
+   (Middle, no) 0.125 0.3125 0.0625 0.5;
+   (Old, no) 0.2 0.2 0.4 0.2;
+   (Young, no) 0.0714286 0.571429 0.0714286 0.285714;
+   (Middle, yes) 0.186567 0.559701 0.0223881 0.231343;
+   (Old, yes) 0.225352 0.43662 0.0704225 0.267606;
+   (Young, yes) 0.130503 0.680818 0.0188679 0.169811;
+}
+probability (Purpose) {
+   table 0.0970297 0.232673 0.10297 0.0128713 0.050495 0.180198 0.0128713 0.278218 0.0227723 0.00990099;
+}
+probability (PersonalStatusSex | Age) {
+   (Middle) 0.2 0.0678571 0.0642857 0.667857;
+   (Old) 0.319444 0.0694444 0.0277778 0.583333;
+   (Young) 0.354545 0.0439394 0.113636 0.487879;
+}
+probability (CreditHistory | ExistingCredits, OtherInstallmentPlans) {
+   (1, bank) 0.238636 0.113636 0.0454545 0.545455 0.0568182;
+   (2, bank) 0.0943396 0.396226 0.188679 0.207547 0.113208;
+   (3, bank) 0.0833333 0.416667 0.0833333 0.25 0.166667;
+   (4, bank) 0.166667 0.166667 0.166667 0.333333 0.166667;
+   (1, none) 0.0265655 0.11575 0.0493359 0.789374 0.0189753;
+   (2, none) 0.018315 0.630037 0.150183 0.131868 0.0695971;
+   (3, none) 0.04 0.76 0.04 0.08 0.08;
+   (4, none) 0.111111 0.333333 0.222222 0.222222 0.111111;
+   (1, stores) 0.272727 0.0606061 0.121212 0.515152 0.030303;
+   (2, stores) 0.0454545 0.363636 0.363636 0.0909091 0.136364;
+   (3, stores) 0.166667 0.166667 0.166667 0.333333 0.166667;
+   (4, stores) 0.166667 0.333333 0.166667 0.166667 0.166667;
+}
 probability (Capital | CheckingAccount, SavingsAccount, Housing) {
    (_0to200, _100to500_DM, for_free) 0.25 0.5 0.25;
    (No_Checking, _100to500_DM, for_free) 0.6 0.3 0.1;
@@ -3302,278 +3474,106 @@ probability (Capital | CheckingAccount, SavingsAccount, Housing) {
    (ge200, unknown__no_savings, rent) 0.5 0.25 0.25;
    (lt0, unknown__no_savings, rent) 0.636364 0.272727 0.0909091;
 }
-probability (OtherInstallmentPlans) {
-   table 0.139581 0.812562 0.0478564;
+probability (Collateral | Property, Housing) {
+   (building_society_savings__life_insurance, for_free) 0.6 0.2 0.2;
+   (car_or_other, for_free) 0.5 0.25 0.25;
+   (real_estate, for_free) 0.5 0.25 0.25;
+   (unknown__no_property, for_free) 0.738318 0.186916 0.0747664;
+   (building_society_savings__life_insurance, own) 0.716578 0.176471 0.106952;
+   (car_or_other, own) 0.664234 0.215328 0.120438;
+   (real_estate, own) 0.668122 0.196507 0.135371;
+   (unknown__no_property, own) 0.8 0.142857 0.0571429;
+   (building_society_savings__life_insurance, rent) 0.632653 0.22449 0.142857;
+   (car_or_other, rent) 0.809524 0.111111 0.0793651;
+   (real_estate, rent) 0.741379 0.12069 0.137931;
+   (unknown__no_property, rent) 0.571429 0.285714 0.142857;
 }
-probability (ForeignWorker) {
-   table 0.0379242 0.962076;
-}
-probability (Purpose) {
-   table 0.0970297 0.232673 0.10297 0.0128713 0.050495 0.180198 0.0128713 0.278218 0.0227723 0.00990099;
-}
-probability (CheckingAccount | Income) {
-   (low) 0.398058 0.262136 0.0679612 0.271845;
-   (medium) 0.396226 0.267296 0.0660377 0.27044;
-   (high) 0.389171 0.270728 0.0642978 0.275804;
-}
-probability (CreditRisk | Character, Capacity, Capital, Collateral, Terms) {
-   (bad, low, low, none, short) 0.222222 0.777778;
-   (good, low, low, none, short) 0.409091 0.590909;
-   (bad, medium, low, none, short) 0.1875 0.8125;
-   (good, medium, low, none, short) 0.323529 0.676471;
-   (bad, high, low, none, short) 0.5 0.5;
-   (good, high, low, none, short) 0.32 0.68;
-   (bad, low, medium, none, short) 0.25 0.75;
-   (good, low, medium, none, short) 0.272727 0.727273;
-   (bad, medium, medium, none, short) 0.4 0.6;
-   (good, medium, medium, none, short) 0.333333 0.666667;
-   (bad, high, medium, none, short) 0.4 0.6;
-   (good, high, medium, none, short) 0.333333 0.666667;
-   (bad, low, high, none, short) 0.5 0.5;
-   (good, low, high, none, short) 0.5 0.5;
-   (bad, medium, high, none, short) 0.4 0.6;
-   (good, medium, high, none, short) 0.4 0.6;
-   (bad, high, high, none, short) 0.5 0.5;
-   (good, high, high, none, short) 0.142857 0.857143;
-   (bad, low, low, some, short) 0.4 0.6;
-   (good, low, low, some, short) 0.416667 0.583333;
-   (bad, medium, low, some, short) 0.5 0.5;
-   (good, medium, low, some, short) 0.3 0.7;
-   (bad, high, low, some, short) 0.5 0.5;
-   (good, high, low, some, short) 0.3 0.7;
-   (bad, low, medium, some, short) 0.5 0.5;
-   (good, low, medium, some, short) 0.333333 0.666667;
-   (bad, medium, medium, some, short) 0.5 0.5;
-   (good, medium, medium, some, short) 0.5 0.5;
-   (bad, high, medium, some, short) 0.5 0.5;
-   (good, high, medium, some, short) 0.333333 0.666667;
-   (bad, low, high, some, short) 0.5 0.5;
-   (good, low, high, some, short) 0.5 0.5;
-   (bad, medium, high, some, short) 0.25 0.75;
-   (good, medium, high, some, short) 0.333333 0.666667;
-   (bad, high, high, some, short) 0.5 0.5;
-   (good, high, high, some, short) 0.5 0.5;
-   (bad, low, low, good, short) 0.666667 0.333333;
-   (good, low, low, good, short) 0.333333 0.666667;
-   (bad, medium, low, good, short) 0.5 0.5;
-   (good, medium, low, good, short) 0.2 0.8;
-   (bad, high, low, good, short) 0.5 0.5;
-   (good, high, low, good, short) 0.142857 0.857143;
-   (bad, low, medium, good, short) 0.5 0.5;
-   (good, low, medium, good, short) 0.5 0.5;
-   (bad, medium, medium, good, short) 0.333333 0.666667;
-   (good, medium, medium, good, short) 0.5 0.5;
-   (bad, high, medium, good, short) 0.5 0.5;
-   (good, high, medium, good, short) 0.5 0.5;
-   (bad, low, high, good, short) 0.5 0.5;
-   (good, low, high, good, short) 0.666667 0.333333;
-   (bad, medium, high, good, short) 0.5 0.5;
-   (good, medium, high, good, short) 0.5 0.5;
-   (bad, high, high, good, short) 0.5 0.5;
-   (good, high, high, good, short) 0.5 0.5;
-   (bad, low, low, none, medium) 0.3 0.7;
-   (good, low, low, none, medium) 0.324324 0.675676;
-   (bad, medium, low, none, medium) 0.1875 0.8125;
-   (good, medium, low, none, medium) 0.254545 0.745455;
-   (bad, high, low, none, medium) 0.0666667 0.933333;
-   (good, high, low, none, medium) 0.432432 0.567568;
-   (bad, low, medium, none, medium) 0.5 0.5;
-   (good, low, medium, none, medium) 0.230769 0.769231;
-   (bad, medium, medium, none, medium) 0.333333 0.666667;
-   (good, medium, medium, none, medium) 0.3125 0.6875;
-   (bad, high, medium, none, medium) 0.6 0.4;
-   (good, high, medium, none, medium) 0.222222 0.777778;
-   (bad, low, high, none, medium) 0.4 0.6;
-   (good, low, high, none, medium) 0.428571 0.571429;
-   (bad, medium, high, none, medium) 0.666667 0.333333;
-   (good, medium, high, none, medium) 0.333333 0.666667;
-   (bad, high, high, none, medium) 0.5 0.5;
-   (good, high, high, none, medium) 0.111111 0.888889;
-   (bad, low, low, some, medium) 0.333333 0.666667;
-   (good, low, low, some, medium) 0.230769 0.769231;
-   (bad, medium, low, some, medium) 0.4 0.6;
-   (good, medium, low, some, medium) 0.5 0.5;
-   (bad, high, low, some, medium) 0.5 0.5;
-   (good, high, low, some, medium) 0.333333 0.666667;
-   (bad, low, medium, some, medium) 0.5 0.5;
-   (good, low, medium, some, medium) 0.5 0.5;
-   (bad, medium, medium, some, medium) 0.333333 0.666667;
-   (good, medium, medium, some, medium) 0.3 0.7;
-   (bad, high, medium, some, medium) 0.5 0.5;
-   (good, high, medium, some, medium) 0.666667 0.333333;
-   (bad, low, high, some, medium) 0.5 0.5;
-   (good, low, high, some, medium) 0.333333 0.666667;
-   (bad, medium, high, some, medium) 0.666667 0.333333;
-   (good, medium, high, some, medium) 0.5 0.5;
-   (bad, high, high, some, medium) 0.5 0.5;
-   (good, high, high, some, medium) 0.333333 0.666667;
-   (bad, low, low, good, medium) 0.333333 0.666667;
-   (good, low, low, good, medium) 0.25 0.75;
-   (bad, medium, low, good, medium) 0.333333 0.666667;
-   (good, medium, low, good, medium) 0.428571 0.571429;
-   (bad, high, low, good, medium) 0.4 0.6;
-   (good, high, low, good, medium) 0.7 0.3;
-   (bad, low, medium, good, medium) 0.5 0.5;
-   (good, low, medium, good, medium) 0.5 0.5;
-   (bad, medium, medium, good, medium) 0.5 0.5;
-   (good, medium, medium, good, medium) 0.25 0.75;
-   (bad, high, medium, good, medium) 0.25 0.75;
-   (good, high, medium, good, medium) 0.333333 0.666667;
-   (bad, low, high, good, medium) 0.5 0.5;
-   (good, low, high, good, medium) 0.333333 0.666667;
-   (bad, medium, high, good, medium) 0.25 0.75;
-   (good, medium, high, good, medium) 0.333333 0.666667;
-   (bad, high, high, good, medium) 0.5 0.5;
-   (good, high, high, good, medium) 0.333333 0.666667;
-   (bad, low, low, none, long) 0.5 0.5;
-   (good, low, low, none, long) 0.296875 0.703125;
-   (bad, medium, low, none, long) 0.363636 0.636364;
-   (good, medium, low, none, long) 0.333333 0.666667;
-   (bad, high, low, none, long) 0.25 0.75;
-   (good, high, low, none, long) 0.264151 0.735849;
-   (bad, low, medium, none, long) 0.5 0.5;
-   (good, low, medium, none, long) 0.470588 0.529412;
-   (bad, medium, medium, none, long) 0.307692 0.692308;
-   (good, medium, medium, none, long) 0.35 0.65;
-   (bad, high, medium, none, long) 0.2 0.8;
-   (good, high, medium, none, long) 0.444444 0.555556;
-   (bad, low, high, none, long) 0.75 0.25;
-   (good, low, high, none, long) 0.125 0.875;
-   (bad, medium, high, none, long) 0.4 0.6;
-   (good, medium, high, none, long) 0.222222 0.777778;
-   (bad, high, high, none, long) 0.2 0.8;
-   (good, high, high, none, long) 0.230769 0.769231;
-   (bad, low, low, some, long) 0.285714 0.714286;
-   (good, low, low, some, long) 0.352941 0.647059;
-   (bad, medium, low, some, long) 0.6 0.4;
-   (good, medium, low, some, long) 0.421053 0.578947;
-   (bad, high, low, some, long) 0.666667 0.333333;
-   (good, high, low, some, long) 0.307692 0.692308;
-   (bad, low, medium, some, long) 0.333333 0.666667;
-   (good, low, medium, some, long) 0.285714 0.714286;
-   (bad, medium, medium, some, long) 0.333333 0.666667;
-   (good, medium, medium, some, long) 0.375 0.625;
-   (bad, high, medium, some, long) 0.25 0.75;
-   (good, high, medium, some, long) 0.333333 0.666667;
-   (bad, low, high, some, long) 0.333333 0.666667;
-   (good, low, high, some, long) 0.666667 0.333333;
-   (bad, medium, high, some, long) 0.5 0.5;
-   (good, medium, high, some, long) 0.25 0.75;
-   (bad, high, high, some, long) 0.333333 0.666667;
-   (good, high, high, some, long) 0.5 0.5;
-   (bad, low, low, good, long) 0.333333 0.666667;
-   (good, low, low, good, long) 0.25 0.75;
-   (bad, medium, low, good, long) 0.25 0.75;
-   (good, medium, low, good, long) 0.333333 0.666667;
-   (bad, high, low, good, long) 0.2 0.8;
-   (good, high, low, good, long) 0.571429 0.428571;
-   (bad, low, medium, good, long) 0.25 0.75;
-   (good, low, medium, good, long) 0.5 0.5;
-   (bad, medium, medium, good, long) 0.5 0.5;
-   (good, medium, medium, good, long) 0.333333 0.666667;
-   (bad, high, medium, good, long) 0.666667 0.333333;
-   (good, high, medium, good, long) 0.5 0.5;
-   (bad, low, high, good, long) 0.5 0.5;
-   (good, low, high, good, long) 0.5 0.5;
-   (bad, medium, high, good, long) 0.5 0.5;
-   (good, medium, high, good, long) 0.25 0.75;
-   (bad, high, high, good, long) 0.5 0.5;
-   (good, high, high, good, long) 0.5 0.5;
-}
-probability (Capacity | Income, ExistingCredits, OtherDebtors, LiablePeople) {
-   (low, 1, co_applicant, 1) 0.333333 0.333333 0.333333;
-   (medium, 1, co_applicant, 1) 0.4 0.2 0.4;
-   (high, 1, co_applicant, 1) 0.277778 0.5 0.222222;
-   (low, 2, co_applicant, 1) 0.25 0.5 0.25;
-   (medium, 2, co_applicant, 1) 0.166667 0.666667 0.166667;
-   (high, 2, co_applicant, 1) 0.285714 0.428571 0.285714;
-   (low, 3, co_applicant, 1) 0.333333 0.333333 0.333333;
-   (medium, 3, co_applicant, 1) 0.333333 0.333333 0.333333;
-   (high, 3, co_applicant, 1) 0.333333 0.333333 0.333333;
-   (low, 4, co_applicant, 1) 0.333333 0.333333 0.333333;
-   (medium, 4, co_applicant, 1) 0.333333 0.333333 0.333333;
-   (high, 4, co_applicant, 1) 0.333333 0.333333 0.333333;
-   (low, 1, guarantor, 1) 0.5 0.25 0.25;
-   (medium, 1, guarantor, 1) 0.230769 0.307692 0.461538;
-   (high, 1, guarantor, 1) 0.333333 0.277778 0.388889;
-   (low, 2, guarantor, 1) 0.333333 0.333333 0.333333;
-   (medium, 2, guarantor, 1) 0.142857 0.571429 0.285714;
-   (high, 2, guarantor, 1) 0.2 0.5 0.3;
-   (low, 3, guarantor, 1) 0.333333 0.333333 0.333333;
-   (medium, 3, guarantor, 1) 0.333333 0.333333 0.333333;
-   (high, 3, guarantor, 1) 0.5 0.25 0.25;
-   (low, 4, guarantor, 1) 0.333333 0.333333 0.333333;
-   (medium, 4, guarantor, 1) 0.333333 0.333333 0.333333;
-   (high, 4, guarantor, 1) 0.333333 0.333333 0.333333;
-   (low, 1, none, 1) 0.392857 0.25 0.357143;
-   (medium, 1, none, 1) 0.327485 0.426901 0.245614;
-   (high, 1, none, 1) 0.28169 0.390845 0.327465;
-   (low, 2, none, 1) 0.1875 0.5 0.3125;
-   (medium, 2, none, 1) 0.333333 0.348485 0.318182;
-   (high, 2, none, 1) 0.316129 0.412903 0.270968;
-   (low, 3, none, 1) 0.333333 0.333333 0.333333;
-   (medium, 3, none, 1) 0.25 0.625 0.125;
-   (high, 3, none, 1) 0.2 0.266667 0.533333;
-   (low, 4, none, 1) 0.333333 0.333333 0.333333;
-   (medium, 4, none, 1) 0.25 0.25 0.5;
-   (high, 4, none, 1) 0.5 0.166667 0.333333;
-   (low, 1, co_applicant, 2) 0.333333 0.333333 0.333333;
-   (medium, 1, co_applicant, 2) 0.2 0.2 0.6;
-   (high, 1, co_applicant, 2) 0.25 0.5 0.25;
-   (low, 2, co_applicant, 2) 0.333333 0.333333 0.333333;
-   (medium, 2, co_applicant, 2) 0.333333 0.333333 0.333333;
-   (high, 2, co_applicant, 2) 0.25 0.5 0.25;
-   (low, 3, co_applicant, 2) 0.333333 0.333333 0.333333;
-   (medium, 3, co_applicant, 2) 0.333333 0.333333 0.333333;
-   (high, 3, co_applicant, 2) 0.333333 0.333333 0.333333;
-   (low, 4, co_applicant, 2) 0.333333 0.333333 0.333333;
-   (medium, 4, co_applicant, 2) 0.333333 0.333333 0.333333;
-   (high, 4, co_applicant, 2) 0.333333 0.333333 0.333333;
-   (low, 1, guarantor, 2) 0.25 0.5 0.25;
-   (medium, 1, guarantor, 2) 0.666667 0.166667 0.166667;
-   (high, 1, guarantor, 2) 0.375 0.125 0.5;
-   (low, 2, guarantor, 2) 0.333333 0.333333 0.333333;
-   (medium, 2, guarantor, 2) 0.333333 0.333333 0.333333;
-   (high, 2, guarantor, 2) 0.4 0.2 0.4;
-   (low, 3, guarantor, 2) 0.333333 0.333333 0.333333;
-   (medium, 3, guarantor, 2) 0.333333 0.333333 0.333333;
-   (high, 3, guarantor, 2) 0.333333 0.333333 0.333333;
-   (low, 4, guarantor, 2) 0.333333 0.333333 0.333333;
-   (medium, 4, guarantor, 2) 0.333333 0.333333 0.333333;
-   (high, 4, guarantor, 2) 0.333333 0.333333 0.333333;
-   (low, 1, none, 2) 0.333333 0.333333 0.333333;
-   (medium, 1, none, 2) 0.307692 0.423077 0.269231;
-   (high, 1, none, 2) 0.244444 0.355556 0.4;
-   (low, 2, none, 2) 0.166667 0.333333 0.5;
-   (medium, 2, none, 2) 0.318182 0.272727 0.409091;
-   (high, 2, none, 2) 0.315789 0.421053 0.263158;
-   (low, 3, none, 2) 0.2 0.6 0.2;
-   (medium, 3, none, 2) 0.142857 0.285714 0.571429;
-   (high, 3, none, 2) 0.285714 0.285714 0.428571;
-   (low, 4, none, 2) 0.333333 0.333333 0.333333;
-   (medium, 4, none, 2) 0.2 0.4 0.4;
-   (high, 4, none, 2) 0.333333 0.333333 0.333333;
-}
-probability (Duration) {
-   table 0.0169492 0.21336 0.769691;
-}
-probability (Job | Age, ForeignWorker) {
-   (Middle, no) 0.125 0.3125 0.0625 0.5;
-   (Old, no) 0.2 0.2 0.4 0.2;
-   (Young, no) 0.0714286 0.571429 0.0714286 0.285714;
-   (Middle, yes) 0.186567 0.559701 0.0223881 0.231343;
-   (Old, yes) 0.225352 0.43662 0.0704225 0.267606;
-   (Young, yes) 0.130503 0.680818 0.0188679 0.169811;
+probability (Property) {
+   table 0.232072 0.331673 0.281873 0.154382;
 }
 probability (EmploymentSince | Age) {
    (Middle) 0.252669 0.13879 0.44484 0.0960854 0.0676157;
    (Old) 0.191781 0.0958904 0.520548 0.0273973 0.164384;
    (Young) 0.388805 0.198185 0.140696 0.220877 0.0514372;
 }
+probability (Terms | CreditAmount, Duration, InstallmentRate) {
+   (High, Long, 1) 0.333333 0.333333 0.333333;
+   (Low, Long, 1) 0.333333 0.333333 0.333333;
+   (Medium, Long, 1) 0.25 0.5 0.25;
+   (High, Medium, 1) 0.5 0.333333 0.166667;
+   (Low, Medium, 1) 0.5 0.2 0.3;
+   (Medium, Medium, 1) 0.375 0.375 0.25;
+   (High, Short, 1) 0.4 0.2 0.4;
+   (Low, Short, 1) 0.514851 0.316832 0.168317;
+   (Medium, Short, 1) 0.6 0.133333 0.266667;
+   (High, Long, 2) 0.4 0.4 0.2;
+   (Low, Long, 2) 0.5 0.25 0.25;
+   (Medium, Long, 2) 0.571429 0.142857 0.285714;
+   (High, Medium, 2) 0.666667 0.166667 0.166667;
+   (Low, Medium, 2) 0.310345 0.482759 0.206897;
+   (Medium, Medium, 2) 0.413793 0.413793 0.172414;
+   (High, Short, 2) 0.333333 0.333333 0.333333;
+   (Low, Short, 2) 0.467949 0.333333 0.198718;
+   (Medium, Short, 2) 0.421053 0.473684 0.105263;
+   (High, Long, 3) 0.4 0.4 0.2;
+   (Low, Long, 3) 0.333333 0.333333 0.333333;
+   (Medium, Long, 3) 0.5 0.25 0.25;
+   (High, Medium, 3) 0.333333 0.333333 0.333333;
+   (Low, Medium, 3) 0.428571 0.238095 0.333333;
+   (Medium, Medium, 3) 0.428571 0.142857 0.428571;
+   (High, Short, 3) 0.25 0.5 0.25;
+   (Low, Short, 3) 0.419355 0.33871 0.241935;
+   (Medium, Short, 3) 0.5 0.333333 0.166667;
+   (High, Long, 4) 0.5 0.25 0.25;
+   (Low, Long, 4) 0.5 0.25 0.25;
+   (Medium, Long, 4) 0.5 0.333333 0.166667;
+   (High, Medium, 4) 0.333333 0.333333 0.333333;
+   (Low, Medium, 4) 0.482353 0.329412 0.188235;
+   (Medium, Medium, 4) 0.458333 0.291667 0.25;
+   (High, Short, 4) 0.4 0.4 0.2;
+   (Low, Short, 4) 0.434903 0.365651 0.199446;
+   (Medium, Short, 4) 0.625 0.125 0.25;
+}
+probability (ResidenceSince | Housing, Age) {
+   (for_free, Middle) 0.0377358 0.113208 0.0566038 0.792453;
+   (own, Middle) 0.1133 0.226601 0.172414 0.487685;
+   (rent, Middle) 0.09375 0.3125 0.125 0.46875;
+   (for_free, Old) 0.0454545 0.0909091 0.0909091 0.772727;
+   (own, Old) 0.0434783 0.0652174 0.195652 0.695652;
+   (rent, Old) 0.0833333 0.166667 0.166667 0.583333;
+   (for_free, Young) 0.111111 0.177778 0.0888889 0.622222;
+   (own, Young) 0.193277 0.439076 0.165966 0.201681;
+   (rent, Young) 0.0680272 0.210884 0.136054 0.585034;
+}
+probability (InstallmentRate) {
+   table 0.136454 0.231076 0.157371 0.4751;
+}
+probability (OtherInstallmentPlans) {
+   table 0.139581 0.812562 0.0478564;
+}
+probability (Housing) {
+   table 0.108674 0.711864 0.179462;
+}
+probability (CheckingAccount | Income) {
+   (low) 0.398058 0.262136 0.0679612 0.271845;
+   (medium) 0.396226 0.267296 0.0660377 0.27044;
+   (high) 0.389171 0.270728 0.0642978 0.275804;
+}
 probability (Age) {
    table 0.276171 0.0687936 0.655035;
 }
-probability (CreditAmount) {
-   table 0.0199402 0.86341 0.11665;
+probability (Duration) {
+   table 0.0169492 0.21336 0.769691;
+}
+probability (LiablePeople | PersonalStatusSex) {
+   (female_divorced_separated_married) 0.951923 0.0480769;
+   (male_divorced_separated) 0.923077 0.0769231;
+   (male_married_widowed) 0.968085 0.0319149;
+   (male_single) 0.750909 0.249091;
+}
+probability (SavingsAccount | Income) {
+   (low) 0.0769231 0.0288462 0.0769231 0.615385 0.201923;
+   (medium) 0.0877743 0.0658307 0.0595611 0.579937 0.206897;
+   (high) 0.118243 0.0709459 0.0405405 0.603041 0.16723;
 }
 

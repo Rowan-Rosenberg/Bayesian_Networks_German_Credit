@@ -49,8 +49,8 @@ def create_credit_influence_diagram(bn_path: str):
     # Define Utility Table based on suggestions in dataset documentation
     util = id.utility(utility_name)
     util["Good", "Approve"] = 0     
-    util["Bad", "Approve"] = -5     
-    util["Good", "Reject"] = -1     
+    util["Bad", "Approve"] = -5   
+    util["Good", "Reject"] = -1   
     util["Bad", "Reject"] = 0 
     id.utility(utility_name).fillWith(util)  
 

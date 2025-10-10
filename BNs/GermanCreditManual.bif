@@ -2,80 +2,16 @@ network "GermanCreditManualBN" {
 // written by aGrUM 2.2.1
 }
 
-variable PersonalStatusSex {
-   type discrete[4] {female_divorced_separated_married, male_divorced_separated, male_married_widowed, male_single};
-}
-
-variable LiablePeople {
-   type discrete[2] {1, 2};
-}
-
-variable SavingsAccount {
-   type discrete[5] {_100to500_DM, _500to1000_DM, ge1000_DM, lt100_DM, unknown__no_savings};
-}
-
-variable ExistingCredits {
-   type discrete[4] {1, 2, 3, 4};
-}
-
-variable Housing {
-   type discrete[3] {for_free, own, rent};
-}
-
-variable Collateral {
-   type discrete[3] {none, some, good};
-}
-
-variable Property {
-   type discrete[4] {building_society_savings__life_insurance, car_or_other, real_estate, unknown__no_property};
-}
-
-variable InstallmentRate {
-   type discrete[4] {1, 2, 3, 4};
-}
-
-variable OtherDebtors {
-   type discrete[3] {co_applicant, guarantor, none};
-}
-
-variable Terms {
-   type discrete[3] {short, medium, long};
-}
-
-variable Income {
-   type discrete[3] {low, medium, high};
-}
-
-variable CreditHistory {
-   type discrete[5] {All_credits_at_this_bank_paid_duly, Critical_account__other_credits_elsewhere, Delay_in_paying_off_in_the_past, Existing_credits_paid_duly_till_now, No_credits_taken__all_paid_duly};
-}
-
-variable ResidenceSince {
-   type discrete[4] {1, 2, 3, 4};
-}
-
-variable Character {
-   type discrete[2] {bad, good};
-}
-
-variable Capital {
-   type discrete[3] {low, medium, high};
-}
-
-variable OtherInstallmentPlans {
-   type discrete[3] {bank, none, stores};
+variable CreditAmount {
+   type discrete[3] {High, Low, Medium};
 }
 
 variable ForeignWorker {
    type discrete[2] {no, yes};
 }
 
-variable Purpose {
-   type discrete[10] {business, car_new, car_used, domestic_appliances, education, furniture_equipment, others, radio_television, repairs, retraining};
-}
-
-variable CheckingAccount {
-   type discrete[4] {_0to200, No_Checking, ge200, lt0};
+variable OtherDebtors {
+   type discrete[3] {co_applicant, guarantor, none};
 }
 
 variable CreditRisk {
@@ -86,157 +22,341 @@ variable Capacity {
    type discrete[3] {low, medium, high};
 }
 
-variable Duration {
-   type discrete[3] {Long, Medium, Short};
+variable ExistingCredits {
+   type discrete[4] {1, 2, 3, 4};
+}
+
+variable Character {
+   type discrete[2] {bad, good};
+}
+
+variable Income {
+   type discrete[3] {low, medium, high};
 }
 
 variable Job {
    type discrete[4] {management_self_employed_highly_qualified_officer, skilled_employee_official, unemployed_unskilled__non_resident, unskilled__resident};
 }
 
+variable Purpose {
+   type discrete[10] {business, car_new, car_used, domestic_appliances, education, furniture_equipment, others, radio_television, repairs, retraining};
+}
+
+variable PersonalStatusSex {
+   type discrete[4] {female_divorced_separated_married, male_divorced_separated, male_married_widowed, male_single};
+}
+
+variable CreditHistory {
+   type discrete[5] {All_credits_at_this_bank_paid_duly, Critical_account__other_credits_elsewhere, Delay_in_paying_off_in_the_past, Existing_credits_paid_duly_till_now, No_credits_taken__all_paid_duly};
+}
+
+variable Capital {
+   type discrete[3] {low, medium, high};
+}
+
+variable Collateral {
+   type discrete[3] {none, some, good};
+}
+
+variable Property {
+   type discrete[4] {building_society_savings__life_insurance, car_or_other, real_estate, unknown__no_property};
+}
+
 variable EmploymentSince {
    type discrete[5] {_1to4_years, _4to7_years, ge7_years, lt1_year, unemployed};
+}
+
+variable Terms {
+   type discrete[3] {short, medium, long};
+}
+
+variable ResidenceSince {
+   type discrete[4] {1, 2, 3, 4};
+}
+
+variable InstallmentRate {
+   type discrete[4] {1, 2, 3, 4};
+}
+
+variable OtherInstallmentPlans {
+   type discrete[3] {bank, none, stores};
+}
+
+variable Housing {
+   type discrete[3] {for_free, own, rent};
+}
+
+variable CheckingAccount {
+   type discrete[4] {_0to200, No_Checking, ge200, lt0};
 }
 
 variable Age {
    type discrete[3] {Middle, Old, Young};
 }
 
-variable CreditAmount {
-   type discrete[3] {High, Low, Medium};
+variable Duration {
+   type discrete[3] {Long, Medium, Short};
 }
 
-probability (PersonalStatusSex | Age) {
-   (Middle) 0 0 0 0;
-   (Old) 0 0 0 0;
-   (Young) 0 0 0 0;
+variable LiablePeople {
+   type discrete[2] {1, 2};
 }
-probability (LiablePeople | PersonalStatusSex) {
-   (female_divorced_separated_married) 0 0;
-   (male_divorced_separated) 0 0;
-   (male_married_widowed) 0 0;
-   (male_single) 0 0;
+
+variable SavingsAccount {
+   type discrete[5] {_100to500_DM, _500to1000_DM, ge1000_DM, lt100_DM, unknown__no_savings};
 }
-probability (SavingsAccount | Income) {
-   (low) 0 0 0 0 0;
-   (medium) 0 0 0 0 0;
-   (high) 0 0 0 0 0;
-}
-probability (ExistingCredits) {
-   table 0 0 0 0;
-}
-probability (Housing) {
+
+probability (CreditAmount) {
    table 0 0 0;
 }
-probability (Collateral | Property, Housing) {
-   (building_society_savings__life_insurance, for_free) 0 0 0;
-   (car_or_other, for_free) 0 0 0;
-   (real_estate, for_free) 0 0 0;
-   (unknown__no_property, for_free) 0 0 0;
-   (building_society_savings__life_insurance, own) 0 0 0;
-   (car_or_other, own) 0 0 0;
-   (real_estate, own) 0 0 0;
-   (unknown__no_property, own) 0 0 0;
-   (building_society_savings__life_insurance, rent) 0 0 0;
-   (car_or_other, rent) 0 0 0;
-   (real_estate, rent) 0 0 0;
-   (unknown__no_property, rent) 0 0 0;
-}
-probability (Property) {
-   table 0 0 0 0;
-}
-probability (InstallmentRate) {
-   table 0 0 0 0;
+probability (ForeignWorker) {
+   table 0 0;
 }
 probability (OtherDebtors | Age) {
    (Middle) 0 0 0;
    (Old) 0 0 0;
    (Young) 0 0 0;
 }
-probability (Terms | CreditAmount, Duration, InstallmentRate) {
-   (High, Long, 1) 0 0 0;
-   (Low, Long, 1) 0 0 0;
-   (Medium, Long, 1) 0 0 0;
-   (High, Medium, 1) 0 0 0;
-   (Low, Medium, 1) 0 0 0;
-   (Medium, Medium, 1) 0 0 0;
-   (High, Short, 1) 0 0 0;
-   (Low, Short, 1) 0 0 0;
-   (Medium, Short, 1) 0 0 0;
-   (High, Long, 2) 0 0 0;
-   (Low, Long, 2) 0 0 0;
-   (Medium, Long, 2) 0 0 0;
-   (High, Medium, 2) 0 0 0;
-   (Low, Medium, 2) 0 0 0;
-   (Medium, Medium, 2) 0 0 0;
-   (High, Short, 2) 0 0 0;
-   (Low, Short, 2) 0 0 0;
-   (Medium, Short, 2) 0 0 0;
-   (High, Long, 3) 0 0 0;
-   (Low, Long, 3) 0 0 0;
-   (Medium, Long, 3) 0 0 0;
-   (High, Medium, 3) 0 0 0;
-   (Low, Medium, 3) 0 0 0;
-   (Medium, Medium, 3) 0 0 0;
-   (High, Short, 3) 0 0 0;
-   (Low, Short, 3) 0 0 0;
-   (Medium, Short, 3) 0 0 0;
-   (High, Long, 4) 0 0 0;
-   (Low, Long, 4) 0 0 0;
-   (Medium, Long, 4) 0 0 0;
-   (High, Medium, 4) 0 0 0;
-   (Low, Medium, 4) 0 0 0;
-   (Medium, Medium, 4) 0 0 0;
-   (High, Short, 4) 0 0 0;
-   (Low, Short, 4) 0 0 0;
-   (Medium, Short, 4) 0 0 0;
+probability (CreditRisk | Character, Capacity, Capital, Collateral, Terms) {
+   (bad, low, low, none, short) 0 0;
+   (good, low, low, none, short) 0 0;
+   (bad, medium, low, none, short) 0 0;
+   (good, medium, low, none, short) 0 0;
+   (bad, high, low, none, short) 0 0;
+   (good, high, low, none, short) 0 0;
+   (bad, low, medium, none, short) 0 0;
+   (good, low, medium, none, short) 0 0;
+   (bad, medium, medium, none, short) 0 0;
+   (good, medium, medium, none, short) 0 0;
+   (bad, high, medium, none, short) 0 0;
+   (good, high, medium, none, short) 0 0;
+   (bad, low, high, none, short) 0 0;
+   (good, low, high, none, short) 0 0;
+   (bad, medium, high, none, short) 0 0;
+   (good, medium, high, none, short) 0 0;
+   (bad, high, high, none, short) 0 0;
+   (good, high, high, none, short) 0 0;
+   (bad, low, low, some, short) 0 0;
+   (good, low, low, some, short) 0 0;
+   (bad, medium, low, some, short) 0 0;
+   (good, medium, low, some, short) 0 0;
+   (bad, high, low, some, short) 0 0;
+   (good, high, low, some, short) 0 0;
+   (bad, low, medium, some, short) 0 0;
+   (good, low, medium, some, short) 0 0;
+   (bad, medium, medium, some, short) 0 0;
+   (good, medium, medium, some, short) 0 0;
+   (bad, high, medium, some, short) 0 0;
+   (good, high, medium, some, short) 0 0;
+   (bad, low, high, some, short) 0 0;
+   (good, low, high, some, short) 0 0;
+   (bad, medium, high, some, short) 0 0;
+   (good, medium, high, some, short) 0 0;
+   (bad, high, high, some, short) 0 0;
+   (good, high, high, some, short) 0 0;
+   (bad, low, low, good, short) 0 0;
+   (good, low, low, good, short) 0 0;
+   (bad, medium, low, good, short) 0 0;
+   (good, medium, low, good, short) 0 0;
+   (bad, high, low, good, short) 0 0;
+   (good, high, low, good, short) 0 0;
+   (bad, low, medium, good, short) 0 0;
+   (good, low, medium, good, short) 0 0;
+   (bad, medium, medium, good, short) 0 0;
+   (good, medium, medium, good, short) 0 0;
+   (bad, high, medium, good, short) 0 0;
+   (good, high, medium, good, short) 0 0;
+   (bad, low, high, good, short) 0 0;
+   (good, low, high, good, short) 0 0;
+   (bad, medium, high, good, short) 0 0;
+   (good, medium, high, good, short) 0 0;
+   (bad, high, high, good, short) 0 0;
+   (good, high, high, good, short) 0 0;
+   (bad, low, low, none, medium) 0 0;
+   (good, low, low, none, medium) 0 0;
+   (bad, medium, low, none, medium) 0 0;
+   (good, medium, low, none, medium) 0 0;
+   (bad, high, low, none, medium) 0 0;
+   (good, high, low, none, medium) 0 0;
+   (bad, low, medium, none, medium) 0 0;
+   (good, low, medium, none, medium) 0 0;
+   (bad, medium, medium, none, medium) 0 0;
+   (good, medium, medium, none, medium) 0 0;
+   (bad, high, medium, none, medium) 0 0;
+   (good, high, medium, none, medium) 0 0;
+   (bad, low, high, none, medium) 0 0;
+   (good, low, high, none, medium) 0 0;
+   (bad, medium, high, none, medium) 0 0;
+   (good, medium, high, none, medium) 0 0;
+   (bad, high, high, none, medium) 0 0;
+   (good, high, high, none, medium) 0 0;
+   (bad, low, low, some, medium) 0 0;
+   (good, low, low, some, medium) 0 0;
+   (bad, medium, low, some, medium) 0 0;
+   (good, medium, low, some, medium) 0 0;
+   (bad, high, low, some, medium) 0 0;
+   (good, high, low, some, medium) 0 0;
+   (bad, low, medium, some, medium) 0 0;
+   (good, low, medium, some, medium) 0 0;
+   (bad, medium, medium, some, medium) 0 0;
+   (good, medium, medium, some, medium) 0 0;
+   (bad, high, medium, some, medium) 0 0;
+   (good, high, medium, some, medium) 0 0;
+   (bad, low, high, some, medium) 0 0;
+   (good, low, high, some, medium) 0 0;
+   (bad, medium, high, some, medium) 0 0;
+   (good, medium, high, some, medium) 0 0;
+   (bad, high, high, some, medium) 0 0;
+   (good, high, high, some, medium) 0 0;
+   (bad, low, low, good, medium) 0 0;
+   (good, low, low, good, medium) 0 0;
+   (bad, medium, low, good, medium) 0 0;
+   (good, medium, low, good, medium) 0 0;
+   (bad, high, low, good, medium) 0 0;
+   (good, high, low, good, medium) 0 0;
+   (bad, low, medium, good, medium) 0 0;
+   (good, low, medium, good, medium) 0 0;
+   (bad, medium, medium, good, medium) 0 0;
+   (good, medium, medium, good, medium) 0 0;
+   (bad, high, medium, good, medium) 0 0;
+   (good, high, medium, good, medium) 0 0;
+   (bad, low, high, good, medium) 0 0;
+   (good, low, high, good, medium) 0 0;
+   (bad, medium, high, good, medium) 0 0;
+   (good, medium, high, good, medium) 0 0;
+   (bad, high, high, good, medium) 0 0;
+   (good, high, high, good, medium) 0 0;
+   (bad, low, low, none, long) 0 0;
+   (good, low, low, none, long) 0 0;
+   (bad, medium, low, none, long) 0 0;
+   (good, medium, low, none, long) 0 0;
+   (bad, high, low, none, long) 0 0;
+   (good, high, low, none, long) 0 0;
+   (bad, low, medium, none, long) 0 0;
+   (good, low, medium, none, long) 0 0;
+   (bad, medium, medium, none, long) 0 0;
+   (good, medium, medium, none, long) 0 0;
+   (bad, high, medium, none, long) 0 0;
+   (good, high, medium, none, long) 0 0;
+   (bad, low, high, none, long) 0 0;
+   (good, low, high, none, long) 0 0;
+   (bad, medium, high, none, long) 0 0;
+   (good, medium, high, none, long) 0 0;
+   (bad, high, high, none, long) 0 0;
+   (good, high, high, none, long) 0 0;
+   (bad, low, low, some, long) 0 0;
+   (good, low, low, some, long) 0 0;
+   (bad, medium, low, some, long) 0 0;
+   (good, medium, low, some, long) 0 0;
+   (bad, high, low, some, long) 0 0;
+   (good, high, low, some, long) 0 0;
+   (bad, low, medium, some, long) 0 0;
+   (good, low, medium, some, long) 0 0;
+   (bad, medium, medium, some, long) 0 0;
+   (good, medium, medium, some, long) 0 0;
+   (bad, high, medium, some, long) 0 0;
+   (good, high, medium, some, long) 0 0;
+   (bad, low, high, some, long) 0 0;
+   (good, low, high, some, long) 0 0;
+   (bad, medium, high, some, long) 0 0;
+   (good, medium, high, some, long) 0 0;
+   (bad, high, high, some, long) 0 0;
+   (good, high, high, some, long) 0 0;
+   (bad, low, low, good, long) 0 0;
+   (good, low, low, good, long) 0 0;
+   (bad, medium, low, good, long) 0 0;
+   (good, medium, low, good, long) 0 0;
+   (bad, high, low, good, long) 0 0;
+   (good, high, low, good, long) 0 0;
+   (bad, low, medium, good, long) 0 0;
+   (good, low, medium, good, long) 0 0;
+   (bad, medium, medium, good, long) 0 0;
+   (good, medium, medium, good, long) 0 0;
+   (bad, high, medium, good, long) 0 0;
+   (good, high, medium, good, long) 0 0;
+   (bad, low, high, good, long) 0 0;
+   (good, low, high, good, long) 0 0;
+   (bad, medium, high, good, long) 0 0;
+   (good, medium, high, good, long) 0 0;
+   (bad, high, high, good, long) 0 0;
+   (good, high, high, good, long) 0 0;
 }
-probability (Income | EmploymentSince, Job) {
-   (_1to4_years, management_self_employed_highly_qualified_officer) 0 0 0;
-   (_4to7_years, management_self_employed_highly_qualified_officer) 0 0 0;
-   (ge7_years, management_self_employed_highly_qualified_officer) 0 0 0;
-   (lt1_year, management_self_employed_highly_qualified_officer) 0 0 0;
-   (unemployed, management_self_employed_highly_qualified_officer) 0 0 0;
-   (_1to4_years, skilled_employee_official) 0 0 0;
-   (_4to7_years, skilled_employee_official) 0 0 0;
-   (ge7_years, skilled_employee_official) 0 0 0;
-   (lt1_year, skilled_employee_official) 0 0 0;
-   (unemployed, skilled_employee_official) 0 0 0;
-   (_1to4_years, unemployed_unskilled__non_resident) 0 0 0;
-   (_4to7_years, unemployed_unskilled__non_resident) 0 0 0;
-   (ge7_years, unemployed_unskilled__non_resident) 0 0 0;
-   (lt1_year, unemployed_unskilled__non_resident) 0 0 0;
-   (unemployed, unemployed_unskilled__non_resident) 0 0 0;
-   (_1to4_years, unskilled__resident) 0 0 0;
-   (_4to7_years, unskilled__resident) 0 0 0;
-   (ge7_years, unskilled__resident) 0 0 0;
-   (lt1_year, unskilled__resident) 0 0 0;
-   (unemployed, unskilled__resident) 0 0 0;
+probability (Capacity | Income, ExistingCredits, OtherDebtors, LiablePeople) {
+   (low, 1, co_applicant, 1) 0 0 0;
+   (medium, 1, co_applicant, 1) 0 0 0;
+   (high, 1, co_applicant, 1) 0 0 0;
+   (low, 2, co_applicant, 1) 0 0 0;
+   (medium, 2, co_applicant, 1) 0 0 0;
+   (high, 2, co_applicant, 1) 0 0 0;
+   (low, 3, co_applicant, 1) 0 0 0;
+   (medium, 3, co_applicant, 1) 0 0 0;
+   (high, 3, co_applicant, 1) 0 0 0;
+   (low, 4, co_applicant, 1) 0 0 0;
+   (medium, 4, co_applicant, 1) 0 0 0;
+   (high, 4, co_applicant, 1) 0 0 0;
+   (low, 1, guarantor, 1) 0 0 0;
+   (medium, 1, guarantor, 1) 0 0 0;
+   (high, 1, guarantor, 1) 0 0 0;
+   (low, 2, guarantor, 1) 0 0 0;
+   (medium, 2, guarantor, 1) 0 0 0;
+   (high, 2, guarantor, 1) 0 0 0;
+   (low, 3, guarantor, 1) 0 0 0;
+   (medium, 3, guarantor, 1) 0 0 0;
+   (high, 3, guarantor, 1) 0 0 0;
+   (low, 4, guarantor, 1) 0 0 0;
+   (medium, 4, guarantor, 1) 0 0 0;
+   (high, 4, guarantor, 1) 0 0 0;
+   (low, 1, none, 1) 0 0 0;
+   (medium, 1, none, 1) 0 0 0;
+   (high, 1, none, 1) 0 0 0;
+   (low, 2, none, 1) 0 0 0;
+   (medium, 2, none, 1) 0 0 0;
+   (high, 2, none, 1) 0 0 0;
+   (low, 3, none, 1) 0 0 0;
+   (medium, 3, none, 1) 0 0 0;
+   (high, 3, none, 1) 0 0 0;
+   (low, 4, none, 1) 0 0 0;
+   (medium, 4, none, 1) 0 0 0;
+   (high, 4, none, 1) 0 0 0;
+   (low, 1, co_applicant, 2) 0 0 0;
+   (medium, 1, co_applicant, 2) 0 0 0;
+   (high, 1, co_applicant, 2) 0 0 0;
+   (low, 2, co_applicant, 2) 0 0 0;
+   (medium, 2, co_applicant, 2) 0 0 0;
+   (high, 2, co_applicant, 2) 0 0 0;
+   (low, 3, co_applicant, 2) 0 0 0;
+   (medium, 3, co_applicant, 2) 0 0 0;
+   (high, 3, co_applicant, 2) 0 0 0;
+   (low, 4, co_applicant, 2) 0 0 0;
+   (medium, 4, co_applicant, 2) 0 0 0;
+   (high, 4, co_applicant, 2) 0 0 0;
+   (low, 1, guarantor, 2) 0 0 0;
+   (medium, 1, guarantor, 2) 0 0 0;
+   (high, 1, guarantor, 2) 0 0 0;
+   (low, 2, guarantor, 2) 0 0 0;
+   (medium, 2, guarantor, 2) 0 0 0;
+   (high, 2, guarantor, 2) 0 0 0;
+   (low, 3, guarantor, 2) 0 0 0;
+   (medium, 3, guarantor, 2) 0 0 0;
+   (high, 3, guarantor, 2) 0 0 0;
+   (low, 4, guarantor, 2) 0 0 0;
+   (medium, 4, guarantor, 2) 0 0 0;
+   (high, 4, guarantor, 2) 0 0 0;
+   (low, 1, none, 2) 0 0 0;
+   (medium, 1, none, 2) 0 0 0;
+   (high, 1, none, 2) 0 0 0;
+   (low, 2, none, 2) 0 0 0;
+   (medium, 2, none, 2) 0 0 0;
+   (high, 2, none, 2) 0 0 0;
+   (low, 3, none, 2) 0 0 0;
+   (medium, 3, none, 2) 0 0 0;
+   (high, 3, none, 2) 0 0 0;
+   (low, 4, none, 2) 0 0 0;
+   (medium, 4, none, 2) 0 0 0;
+   (high, 4, none, 2) 0 0 0;
 }
-probability (CreditHistory | ExistingCredits, OtherInstallmentPlans) {
-   (1, bank) 0 0 0 0 0;
-   (2, bank) 0 0 0 0 0;
-   (3, bank) 0 0 0 0 0;
-   (4, bank) 0 0 0 0 0;
-   (1, none) 0 0 0 0 0;
-   (2, none) 0 0 0 0 0;
-   (3, none) 0 0 0 0 0;
-   (4, none) 0 0 0 0 0;
-   (1, stores) 0 0 0 0 0;
-   (2, stores) 0 0 0 0 0;
-   (3, stores) 0 0 0 0 0;
-   (4, stores) 0 0 0 0 0;
-}
-probability (ResidenceSince | Housing, Age) {
-   (for_free, Middle) 0 0 0 0;
-   (own, Middle) 0 0 0 0;
-   (rent, Middle) 0 0 0 0;
-   (for_free, Old) 0 0 0 0;
-   (own, Old) 0 0 0 0;
-   (rent, Old) 0 0 0 0;
-   (for_free, Young) 0 0 0 0;
-   (own, Young) 0 0 0 0;
-   (rent, Young) 0 0 0 0;
+probability (ExistingCredits) {
+   table 0 0 0 0;
 }
 probability (Character | CreditHistory, EmploymentSince, ResidenceSince, OtherInstallmentPlans, Purpose) {
    (All_credits_at_this_bank_paid_duly, _1to4_years, 1, bank, business) 0 0;
@@ -3240,6 +3360,58 @@ probability (Character | CreditHistory, EmploymentSince, ResidenceSince, OtherIn
    (Existing_credits_paid_duly_till_now, unemployed, 4, stores, retraining) 0 0;
    (No_credits_taken__all_paid_duly, unemployed, 4, stores, retraining) 0 0;
 }
+probability (Income | EmploymentSince, Job) {
+   (_1to4_years, management_self_employed_highly_qualified_officer) 0 0 0;
+   (_4to7_years, management_self_employed_highly_qualified_officer) 0 0 0;
+   (ge7_years, management_self_employed_highly_qualified_officer) 0 0 0;
+   (lt1_year, management_self_employed_highly_qualified_officer) 0 0 0;
+   (unemployed, management_self_employed_highly_qualified_officer) 0 0 0;
+   (_1to4_years, skilled_employee_official) 0 0 0;
+   (_4to7_years, skilled_employee_official) 0 0 0;
+   (ge7_years, skilled_employee_official) 0 0 0;
+   (lt1_year, skilled_employee_official) 0 0 0;
+   (unemployed, skilled_employee_official) 0 0 0;
+   (_1to4_years, unemployed_unskilled__non_resident) 0 0 0;
+   (_4to7_years, unemployed_unskilled__non_resident) 0 0 0;
+   (ge7_years, unemployed_unskilled__non_resident) 0 0 0;
+   (lt1_year, unemployed_unskilled__non_resident) 0 0 0;
+   (unemployed, unemployed_unskilled__non_resident) 0 0 0;
+   (_1to4_years, unskilled__resident) 0 0 0;
+   (_4to7_years, unskilled__resident) 0 0 0;
+   (ge7_years, unskilled__resident) 0 0 0;
+   (lt1_year, unskilled__resident) 0 0 0;
+   (unemployed, unskilled__resident) 0 0 0;
+}
+probability (Job | Age, ForeignWorker) {
+   (Middle, no) 0 0 0 0;
+   (Old, no) 0 0 0 0;
+   (Young, no) 0 0 0 0;
+   (Middle, yes) 0 0 0 0;
+   (Old, yes) 0 0 0 0;
+   (Young, yes) 0 0 0 0;
+}
+probability (Purpose) {
+   table 0 0 0 0 0 0 0 0 0 0;
+}
+probability (PersonalStatusSex | Age) {
+   (Middle) 0 0 0 0;
+   (Old) 0 0 0 0;
+   (Young) 0 0 0 0;
+}
+probability (CreditHistory | ExistingCredits, OtherInstallmentPlans) {
+   (1, bank) 0 0 0 0 0;
+   (2, bank) 0 0 0 0 0;
+   (3, bank) 0 0 0 0 0;
+   (4, bank) 0 0 0 0 0;
+   (1, none) 0 0 0 0 0;
+   (2, none) 0 0 0 0 0;
+   (3, none) 0 0 0 0 0;
+   (4, none) 0 0 0 0 0;
+   (1, stores) 0 0 0 0 0;
+   (2, stores) 0 0 0 0 0;
+   (3, stores) 0 0 0 0 0;
+   (4, stores) 0 0 0 0 0;
+}
 probability (Capital | CheckingAccount, SavingsAccount, Housing) {
    (_0to200, _100to500_DM, for_free) 0 0 0;
    (No_Checking, _100to500_DM, for_free) 0 0 0;
@@ -3302,278 +3474,106 @@ probability (Capital | CheckingAccount, SavingsAccount, Housing) {
    (ge200, unknown__no_savings, rent) 0 0 0;
    (lt0, unknown__no_savings, rent) 0 0 0;
 }
-probability (OtherInstallmentPlans) {
-   table 0 0 0;
+probability (Collateral | Property, Housing) {
+   (building_society_savings__life_insurance, for_free) 0 0 0;
+   (car_or_other, for_free) 0 0 0;
+   (real_estate, for_free) 0 0 0;
+   (unknown__no_property, for_free) 0 0 0;
+   (building_society_savings__life_insurance, own) 0 0 0;
+   (car_or_other, own) 0 0 0;
+   (real_estate, own) 0 0 0;
+   (unknown__no_property, own) 0 0 0;
+   (building_society_savings__life_insurance, rent) 0 0 0;
+   (car_or_other, rent) 0 0 0;
+   (real_estate, rent) 0 0 0;
+   (unknown__no_property, rent) 0 0 0;
 }
-probability (ForeignWorker) {
-   table 0 0;
-}
-probability (Purpose) {
-   table 0 0 0 0 0 0 0 0 0 0;
-}
-probability (CheckingAccount | Income) {
-   (low) 0 0 0 0;
-   (medium) 0 0 0 0;
-   (high) 0 0 0 0;
-}
-probability (CreditRisk | Character, Capacity, Capital, Collateral, Terms) {
-   (bad, low, low, none, short) 0 0;
-   (good, low, low, none, short) 0 0;
-   (bad, medium, low, none, short) 0 0;
-   (good, medium, low, none, short) 0 0;
-   (bad, high, low, none, short) 0 0;
-   (good, high, low, none, short) 0 0;
-   (bad, low, medium, none, short) 0 0;
-   (good, low, medium, none, short) 0 0;
-   (bad, medium, medium, none, short) 0 0;
-   (good, medium, medium, none, short) 0 0;
-   (bad, high, medium, none, short) 0 0;
-   (good, high, medium, none, short) 0 0;
-   (bad, low, high, none, short) 0 0;
-   (good, low, high, none, short) 0 0;
-   (bad, medium, high, none, short) 0 0;
-   (good, medium, high, none, short) 0 0;
-   (bad, high, high, none, short) 0 0;
-   (good, high, high, none, short) 0 0;
-   (bad, low, low, some, short) 0 0;
-   (good, low, low, some, short) 0 0;
-   (bad, medium, low, some, short) 0 0;
-   (good, medium, low, some, short) 0 0;
-   (bad, high, low, some, short) 0 0;
-   (good, high, low, some, short) 0 0;
-   (bad, low, medium, some, short) 0 0;
-   (good, low, medium, some, short) 0 0;
-   (bad, medium, medium, some, short) 0 0;
-   (good, medium, medium, some, short) 0 0;
-   (bad, high, medium, some, short) 0 0;
-   (good, high, medium, some, short) 0 0;
-   (bad, low, high, some, short) 0 0;
-   (good, low, high, some, short) 0 0;
-   (bad, medium, high, some, short) 0 0;
-   (good, medium, high, some, short) 0 0;
-   (bad, high, high, some, short) 0 0;
-   (good, high, high, some, short) 0 0;
-   (bad, low, low, good, short) 0 0;
-   (good, low, low, good, short) 0 0;
-   (bad, medium, low, good, short) 0 0;
-   (good, medium, low, good, short) 0 0;
-   (bad, high, low, good, short) 0 0;
-   (good, high, low, good, short) 0 0;
-   (bad, low, medium, good, short) 0 0;
-   (good, low, medium, good, short) 0 0;
-   (bad, medium, medium, good, short) 0 0;
-   (good, medium, medium, good, short) 0 0;
-   (bad, high, medium, good, short) 0 0;
-   (good, high, medium, good, short) 0 0;
-   (bad, low, high, good, short) 0 0;
-   (good, low, high, good, short) 0 0;
-   (bad, medium, high, good, short) 0 0;
-   (good, medium, high, good, short) 0 0;
-   (bad, high, high, good, short) 0 0;
-   (good, high, high, good, short) 0 0;
-   (bad, low, low, none, medium) 0 0;
-   (good, low, low, none, medium) 0 0;
-   (bad, medium, low, none, medium) 0 0;
-   (good, medium, low, none, medium) 0 0;
-   (bad, high, low, none, medium) 0 0;
-   (good, high, low, none, medium) 0 0;
-   (bad, low, medium, none, medium) 0 0;
-   (good, low, medium, none, medium) 0 0;
-   (bad, medium, medium, none, medium) 0 0;
-   (good, medium, medium, none, medium) 0 0;
-   (bad, high, medium, none, medium) 0 0;
-   (good, high, medium, none, medium) 0 0;
-   (bad, low, high, none, medium) 0 0;
-   (good, low, high, none, medium) 0 0;
-   (bad, medium, high, none, medium) 0 0;
-   (good, medium, high, none, medium) 0 0;
-   (bad, high, high, none, medium) 0 0;
-   (good, high, high, none, medium) 0 0;
-   (bad, low, low, some, medium) 0 0;
-   (good, low, low, some, medium) 0 0;
-   (bad, medium, low, some, medium) 0 0;
-   (good, medium, low, some, medium) 0 0;
-   (bad, high, low, some, medium) 0 0;
-   (good, high, low, some, medium) 0 0;
-   (bad, low, medium, some, medium) 0 0;
-   (good, low, medium, some, medium) 0 0;
-   (bad, medium, medium, some, medium) 0 0;
-   (good, medium, medium, some, medium) 0 0;
-   (bad, high, medium, some, medium) 0 0;
-   (good, high, medium, some, medium) 0 0;
-   (bad, low, high, some, medium) 0 0;
-   (good, low, high, some, medium) 0 0;
-   (bad, medium, high, some, medium) 0 0;
-   (good, medium, high, some, medium) 0 0;
-   (bad, high, high, some, medium) 0 0;
-   (good, high, high, some, medium) 0 0;
-   (bad, low, low, good, medium) 0 0;
-   (good, low, low, good, medium) 0 0;
-   (bad, medium, low, good, medium) 0 0;
-   (good, medium, low, good, medium) 0 0;
-   (bad, high, low, good, medium) 0 0;
-   (good, high, low, good, medium) 0 0;
-   (bad, low, medium, good, medium) 0 0;
-   (good, low, medium, good, medium) 0 0;
-   (bad, medium, medium, good, medium) 0 0;
-   (good, medium, medium, good, medium) 0 0;
-   (bad, high, medium, good, medium) 0 0;
-   (good, high, medium, good, medium) 0 0;
-   (bad, low, high, good, medium) 0 0;
-   (good, low, high, good, medium) 0 0;
-   (bad, medium, high, good, medium) 0 0;
-   (good, medium, high, good, medium) 0 0;
-   (bad, high, high, good, medium) 0 0;
-   (good, high, high, good, medium) 0 0;
-   (bad, low, low, none, long) 0 0;
-   (good, low, low, none, long) 0 0;
-   (bad, medium, low, none, long) 0 0;
-   (good, medium, low, none, long) 0 0;
-   (bad, high, low, none, long) 0 0;
-   (good, high, low, none, long) 0 0;
-   (bad, low, medium, none, long) 0 0;
-   (good, low, medium, none, long) 0 0;
-   (bad, medium, medium, none, long) 0 0;
-   (good, medium, medium, none, long) 0 0;
-   (bad, high, medium, none, long) 0 0;
-   (good, high, medium, none, long) 0 0;
-   (bad, low, high, none, long) 0 0;
-   (good, low, high, none, long) 0 0;
-   (bad, medium, high, none, long) 0 0;
-   (good, medium, high, none, long) 0 0;
-   (bad, high, high, none, long) 0 0;
-   (good, high, high, none, long) 0 0;
-   (bad, low, low, some, long) 0 0;
-   (good, low, low, some, long) 0 0;
-   (bad, medium, low, some, long) 0 0;
-   (good, medium, low, some, long) 0 0;
-   (bad, high, low, some, long) 0 0;
-   (good, high, low, some, long) 0 0;
-   (bad, low, medium, some, long) 0 0;
-   (good, low, medium, some, long) 0 0;
-   (bad, medium, medium, some, long) 0 0;
-   (good, medium, medium, some, long) 0 0;
-   (bad, high, medium, some, long) 0 0;
-   (good, high, medium, some, long) 0 0;
-   (bad, low, high, some, long) 0 0;
-   (good, low, high, some, long) 0 0;
-   (bad, medium, high, some, long) 0 0;
-   (good, medium, high, some, long) 0 0;
-   (bad, high, high, some, long) 0 0;
-   (good, high, high, some, long) 0 0;
-   (bad, low, low, good, long) 0 0;
-   (good, low, low, good, long) 0 0;
-   (bad, medium, low, good, long) 0 0;
-   (good, medium, low, good, long) 0 0;
-   (bad, high, low, good, long) 0 0;
-   (good, high, low, good, long) 0 0;
-   (bad, low, medium, good, long) 0 0;
-   (good, low, medium, good, long) 0 0;
-   (bad, medium, medium, good, long) 0 0;
-   (good, medium, medium, good, long) 0 0;
-   (bad, high, medium, good, long) 0 0;
-   (good, high, medium, good, long) 0 0;
-   (bad, low, high, good, long) 0 0;
-   (good, low, high, good, long) 0 0;
-   (bad, medium, high, good, long) 0 0;
-   (good, medium, high, good, long) 0 0;
-   (bad, high, high, good, long) 0 0;
-   (good, high, high, good, long) 0 0;
-}
-probability (Capacity | Income, ExistingCredits, OtherDebtors, LiablePeople) {
-   (low, 1, co_applicant, 1) 0 0 0;
-   (medium, 1, co_applicant, 1) 0 0 0;
-   (high, 1, co_applicant, 1) 0 0 0;
-   (low, 2, co_applicant, 1) 0 0 0;
-   (medium, 2, co_applicant, 1) 0 0 0;
-   (high, 2, co_applicant, 1) 0 0 0;
-   (low, 3, co_applicant, 1) 0 0 0;
-   (medium, 3, co_applicant, 1) 0 0 0;
-   (high, 3, co_applicant, 1) 0 0 0;
-   (low, 4, co_applicant, 1) 0 0 0;
-   (medium, 4, co_applicant, 1) 0 0 0;
-   (high, 4, co_applicant, 1) 0 0 0;
-   (low, 1, guarantor, 1) 0 0 0;
-   (medium, 1, guarantor, 1) 0 0 0;
-   (high, 1, guarantor, 1) 0 0 0;
-   (low, 2, guarantor, 1) 0 0 0;
-   (medium, 2, guarantor, 1) 0 0 0;
-   (high, 2, guarantor, 1) 0 0 0;
-   (low, 3, guarantor, 1) 0 0 0;
-   (medium, 3, guarantor, 1) 0 0 0;
-   (high, 3, guarantor, 1) 0 0 0;
-   (low, 4, guarantor, 1) 0 0 0;
-   (medium, 4, guarantor, 1) 0 0 0;
-   (high, 4, guarantor, 1) 0 0 0;
-   (low, 1, none, 1) 0 0 0;
-   (medium, 1, none, 1) 0 0 0;
-   (high, 1, none, 1) 0 0 0;
-   (low, 2, none, 1) 0 0 0;
-   (medium, 2, none, 1) 0 0 0;
-   (high, 2, none, 1) 0 0 0;
-   (low, 3, none, 1) 0 0 0;
-   (medium, 3, none, 1) 0 0 0;
-   (high, 3, none, 1) 0 0 0;
-   (low, 4, none, 1) 0 0 0;
-   (medium, 4, none, 1) 0 0 0;
-   (high, 4, none, 1) 0 0 0;
-   (low, 1, co_applicant, 2) 0 0 0;
-   (medium, 1, co_applicant, 2) 0 0 0;
-   (high, 1, co_applicant, 2) 0 0 0;
-   (low, 2, co_applicant, 2) 0 0 0;
-   (medium, 2, co_applicant, 2) 0 0 0;
-   (high, 2, co_applicant, 2) 0 0 0;
-   (low, 3, co_applicant, 2) 0 0 0;
-   (medium, 3, co_applicant, 2) 0 0 0;
-   (high, 3, co_applicant, 2) 0 0 0;
-   (low, 4, co_applicant, 2) 0 0 0;
-   (medium, 4, co_applicant, 2) 0 0 0;
-   (high, 4, co_applicant, 2) 0 0 0;
-   (low, 1, guarantor, 2) 0 0 0;
-   (medium, 1, guarantor, 2) 0 0 0;
-   (high, 1, guarantor, 2) 0 0 0;
-   (low, 2, guarantor, 2) 0 0 0;
-   (medium, 2, guarantor, 2) 0 0 0;
-   (high, 2, guarantor, 2) 0 0 0;
-   (low, 3, guarantor, 2) 0 0 0;
-   (medium, 3, guarantor, 2) 0 0 0;
-   (high, 3, guarantor, 2) 0 0 0;
-   (low, 4, guarantor, 2) 0 0 0;
-   (medium, 4, guarantor, 2) 0 0 0;
-   (high, 4, guarantor, 2) 0 0 0;
-   (low, 1, none, 2) 0 0 0;
-   (medium, 1, none, 2) 0 0 0;
-   (high, 1, none, 2) 0 0 0;
-   (low, 2, none, 2) 0 0 0;
-   (medium, 2, none, 2) 0 0 0;
-   (high, 2, none, 2) 0 0 0;
-   (low, 3, none, 2) 0 0 0;
-   (medium, 3, none, 2) 0 0 0;
-   (high, 3, none, 2) 0 0 0;
-   (low, 4, none, 2) 0 0 0;
-   (medium, 4, none, 2) 0 0 0;
-   (high, 4, none, 2) 0 0 0;
-}
-probability (Duration) {
-   table 0 0 0;
-}
-probability (Job | Age, ForeignWorker) {
-   (Middle, no) 0 0 0 0;
-   (Old, no) 0 0 0 0;
-   (Young, no) 0 0 0 0;
-   (Middle, yes) 0 0 0 0;
-   (Old, yes) 0 0 0 0;
-   (Young, yes) 0 0 0 0;
+probability (Property) {
+   table 0 0 0 0;
 }
 probability (EmploymentSince | Age) {
    (Middle) 0 0 0 0 0;
    (Old) 0 0 0 0 0;
    (Young) 0 0 0 0 0;
 }
+probability (Terms | CreditAmount, Duration, InstallmentRate) {
+   (High, Long, 1) 0 0 0;
+   (Low, Long, 1) 0 0 0;
+   (Medium, Long, 1) 0 0 0;
+   (High, Medium, 1) 0 0 0;
+   (Low, Medium, 1) 0 0 0;
+   (Medium, Medium, 1) 0 0 0;
+   (High, Short, 1) 0 0 0;
+   (Low, Short, 1) 0 0 0;
+   (Medium, Short, 1) 0 0 0;
+   (High, Long, 2) 0 0 0;
+   (Low, Long, 2) 0 0 0;
+   (Medium, Long, 2) 0 0 0;
+   (High, Medium, 2) 0 0 0;
+   (Low, Medium, 2) 0 0 0;
+   (Medium, Medium, 2) 0 0 0;
+   (High, Short, 2) 0 0 0;
+   (Low, Short, 2) 0 0 0;
+   (Medium, Short, 2) 0 0 0;
+   (High, Long, 3) 0 0 0;
+   (Low, Long, 3) 0 0 0;
+   (Medium, Long, 3) 0 0 0;
+   (High, Medium, 3) 0 0 0;
+   (Low, Medium, 3) 0 0 0;
+   (Medium, Medium, 3) 0 0 0;
+   (High, Short, 3) 0 0 0;
+   (Low, Short, 3) 0 0 0;
+   (Medium, Short, 3) 0 0 0;
+   (High, Long, 4) 0 0 0;
+   (Low, Long, 4) 0 0 0;
+   (Medium, Long, 4) 0 0 0;
+   (High, Medium, 4) 0 0 0;
+   (Low, Medium, 4) 0 0 0;
+   (Medium, Medium, 4) 0 0 0;
+   (High, Short, 4) 0 0 0;
+   (Low, Short, 4) 0 0 0;
+   (Medium, Short, 4) 0 0 0;
+}
+probability (ResidenceSince | Housing, Age) {
+   (for_free, Middle) 0 0 0 0;
+   (own, Middle) 0 0 0 0;
+   (rent, Middle) 0 0 0 0;
+   (for_free, Old) 0 0 0 0;
+   (own, Old) 0 0 0 0;
+   (rent, Old) 0 0 0 0;
+   (for_free, Young) 0 0 0 0;
+   (own, Young) 0 0 0 0;
+   (rent, Young) 0 0 0 0;
+}
+probability (InstallmentRate) {
+   table 0 0 0 0;
+}
+probability (OtherInstallmentPlans) {
+   table 0 0 0;
+}
+probability (Housing) {
+   table 0 0 0;
+}
+probability (CheckingAccount | Income) {
+   (low) 0 0 0 0;
+   (medium) 0 0 0 0;
+   (high) 0 0 0 0;
+}
 probability (Age) {
    table 0 0 0;
 }
-probability (CreditAmount) {
+probability (Duration) {
    table 0 0 0;
+}
+probability (LiablePeople | PersonalStatusSex) {
+   (female_divorced_separated_married) 0 0;
+   (male_divorced_separated) 0 0;
+   (male_married_widowed) 0 0;
+   (male_single) 0 0;
+}
+probability (SavingsAccount | Income) {
+   (low) 0 0 0 0 0;
+   (medium) 0 0 0 0 0;
+   (high) 0 0 0 0 0;
 }
 

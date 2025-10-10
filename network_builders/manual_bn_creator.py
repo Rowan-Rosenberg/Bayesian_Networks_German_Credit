@@ -134,7 +134,6 @@ bn.addArcs([
     ("ForeignWorker", "Job"),
     ("PersonalStatusSex", "LiablePeople"),
     
-
     ("Property", "Collateral"),
     ("Housing", "Collateral"),
 
