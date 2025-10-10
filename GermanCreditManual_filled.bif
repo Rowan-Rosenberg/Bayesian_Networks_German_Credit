@@ -1,0 +1,299 @@
+network ""GermanCreditManualBN"" {
+// written by aGrUM 2.2.1
+}
+
+variable CheckingAccount {
+   type discrete[2] {0, 1};
+}
+
+variable SavingsAccount {
+   type discrete[2] {0, 1};
+}
+
+variable Property {
+   type discrete[2] {0, 1};
+}
+
+variable Housing {
+   type discrete[2] {0, 1};
+}
+
+variable EmploymentSince {
+   type discrete[2] {0, 1};
+}
+
+variable Job {
+   type discrete[2] {0, 1};
+}
+
+variable Income {
+   type discrete[2] {0, 1};
+}
+
+variable ResidenceSince {
+   type discrete[2] {0, 1};
+}
+
+variable CreditHistory {
+   type discrete[2] {0, 1};
+}
+
+variable ExistingCredits {
+   type discrete[2] {0, 1};
+}
+
+variable OtherInstallmentPlans {
+   type discrete[2] {0, 1};
+}
+
+variable OtherDebtors {
+   type discrete[2] {0, 1};
+}
+
+variable CreditAmount {
+   type discrete[2] {0, 1};
+}
+
+variable Duration {
+   type discrete[2] {0, 1};
+}
+
+variable InstallmentRate {
+   type discrete[2] {0, 1};
+}
+
+variable Purpose {
+   type discrete[2] {0, 1};
+}
+
+variable Age {
+   type discrete[2] {0, 1};
+}
+
+variable PersonalStatusSex {
+   type discrete[2] {0, 1};
+}
+
+variable LiablePeople {
+   type discrete[2] {0, 1};
+}
+
+variable ForeignWorker {
+   type discrete[2] {0, 1};
+}
+
+variable Capacity {
+   type discrete[2] {0, 1};
+}
+
+variable Character {
+   type discrete[2] {0, 1};
+}
+
+variable Capital {
+   type discrete[2] {0, 1};
+}
+
+variable Collateral {
+   type discrete[2] {0, 1};
+}
+
+variable Terms {
+   type discrete[2] {0, 1};
+}
+
+variable CreditRisk {
+   type discrete[2] {0, 1};
+}
+
+probability (CheckingAccount | Income) {
+   (0) 0.398176 0.601824;
+   (1) 0.414201 0.585799;
+}
+probability (SavingsAccount | Income) {
+   (0) 0.571429 0.428571;
+   (1) 0.680556 0.319444;
+}
+probability (Property) {
+   table 0.411661 0.588339;
+}
+probability (Housing) {
+   table 0.132442 0.867558;
+}
+probability (EmploymentSince | Age) {
+   (0) 0.645455 0.354545;
+   (1) 0.666667 0.333333;
+}
+probability (Job | Age, ForeignWorker) {
+   (0, 0) 0.285714 0.714286;
+   (1, 0) 0.5 0.5;
+   (0, 1) 0.25 0.75;
+   (1, 1) 0.340426 0.659574;
+}
+probability (Income | EmploymentSince, Job) {
+   (0, 0) 0.366667 0.633333;
+   (1, 0) 0.608696 0.391304;
+   (0, 1) 0.50431 0.49569;
+   (1, 1) 0.471074 0.528926;
+}
+probability (ResidenceSince | Housing, Age) {
+   (0, 0) 0.25 0.75;
+   (1, 0) 0.333333 0.666667;
+   (0, 1) 0.333333 0.666667;
+   (1, 1) 0.4 0.6;
+}
+probability (CreditHistory | ExistingCredits, OtherInstallmentPlans) {
+   (0, 0) 0.677419 0.322581;
+   (1, 0) 0.192308 0.807692;
+   (0, 1) 0.186667 0.813333;
+   (1, 1) 0.0282486 0.971751;
+}
+probability (ExistingCredits) {
+   table 0.654959 0.345041;
+}
+probability (OtherInstallmentPlans) {
+   table 0.146597 0.853403;
+}
+probability (OtherDebtors | Age) {
+   (0) 0.481481 0.518519;
+   (1) 0.428571 0.571429;
+}
+probability (CreditAmount) {
+   table 0.0225734 0.977427;
+}
+probability (Duration) {
+   table 0.0735931 0.926407;
+}
+probability (InstallmentRate) {
+   table 0.371274 0.628726;
+}
+probability (Purpose) {
+   table 0.294294 0.705706;
+}
+probability (Age) {
+   table 0.800578 0.199422;
+}
+probability (PersonalStatusSex | Age) {
+   (0) 0.746667 0.253333;
+   (1) 0.821429 0.178571;
+}
+probability (LiablePeople | PersonalStatusSex) {
+   (0) 0.951923 0.0480769;
+   (1) 0.923077 0.0769231;
+}
+probability (ForeignWorker) {
+   table 0.0379242 0.962076;
+}
+probability (Capacity | Income, ExistingCredits, OtherDebtors, LiablePeople) {
+   (0, 0, 0, 0) 0.357143 0.642857;
+   (1, 0, 0, 0) 0.416667 0.583333;
+   (0, 1, 0, 0) 0.4 0.6;
+   (1, 1, 0, 0) 0.666667 0.333333;
+   (0, 0, 1, 0) 0.764706 0.235294;
+   (1, 0, 1, 0) 0.307692 0.692308;
+   (0, 1, 1, 0) 0.428571 0.571429;
+   (1, 1, 1, 0) 0.25 0.75;
+   (0, 0, 0, 1) 0.5 0.5;
+   (1, 0, 0, 1) 0.6 0.4;
+   (0, 1, 0, 1) 0.5 0.5;
+   (1, 1, 0, 1) 0.333333 0.666667;
+   (0, 0, 1, 1) 0.428571 0.571429;
+   (1, 0, 1, 1) 0.5 0.5;
+   (0, 1, 1, 1) 0.25 0.75;
+   (1, 1, 1, 1) 0.5 0.5;
+}
+probability (Character | CreditHistory, EmploymentSince, ResidenceSince, OtherInstallmentPlans, Purpose) {
+   (0, 0, 0, 0, 0) 0.5 0.5;
+   (1, 0, 0, 0, 0) 0.5 0.5;
+   (0, 1, 0, 0, 0) 0.5 0.5;
+   (1, 1, 0, 0, 0) 0.333333 0.666667;
+   (0, 0, 1, 0, 0) 0.5 0.5;
+   (1, 0, 1, 0, 0) 0.5 0.5;
+   (0, 1, 1, 0, 0) 0.5 0.5;
+   (1, 1, 1, 0, 0) 0.5 0.5;
+   (0, 0, 0, 1, 0) 0.5 0.5;
+   (1, 0, 0, 1, 0) 0.5 0.5;
+   (0, 1, 0, 1, 0) 0.5 0.5;
+   (1, 1, 0, 1, 0) 0.333333 0.666667;
+   (0, 0, 1, 1, 0) 0.333333 0.666667;
+   (1, 0, 1, 1, 0) 0.4 0.6;
+   (0, 1, 1, 1, 0) 0.333333 0.666667;
+   (1, 1, 1, 1, 0) 0.5 0.5;
+   (0, 0, 0, 0, 1) 0.5 0.5;
+   (1, 0, 0, 0, 1) 0.5 0.5;
+   (0, 1, 0, 0, 1) 0.5 0.5;
+   (1, 1, 0, 0, 1) 0.5 0.5;
+   (0, 0, 1, 0, 1) 0.5 0.5;
+   (1, 0, 1, 0, 1) 0.166667 0.833333;
+   (0, 1, 1, 0, 1) 0.5 0.5;
+   (1, 1, 1, 0, 1) 0.25 0.75;
+   (0, 0, 0, 1, 1) 0.5 0.5;
+   (1, 0, 0, 1, 1) 0.5 0.5;
+   (0, 1, 0, 1, 1) 0.5 0.5;
+   (1, 1, 0, 1, 1) 0.25 0.75;
+   (0, 0, 1, 1, 1) 0.5 0.5;
+   (1, 0, 1, 1, 1) 0.333333 0.666667;
+   (0, 1, 1, 1, 1) 0.5 0.5;
+   (1, 1, 1, 1, 1) 0.333333 0.666667;
+}
+probability (Capital | CheckingAccount, SavingsAccount, Housing) {
+   (0, 0, 0) 0.666667 0.333333;
+   (1, 0, 0) 0.666667 0.333333;
+   (0, 1, 0) 0.5 0.5;
+   (1, 1, 0) 0.5 0.5;
+   (0, 0, 1) 0.275862 0.724138;
+   (1, 0, 1) 0.5 0.5;
+   (0, 1, 1) 0.5 0.5;
+   (1, 1, 1) 0.451613 0.548387;
+}
+probability (Collateral | Property, Housing) {
+   (0, 0) 0.5 0.5;
+   (1, 0) 0.333333 0.666667;
+   (0, 1) 0.467742 0.532258;
+   (1, 1) 0.465201 0.534799;
+}
+probability (Terms | CreditAmount, Duration, InstallmentRate) {
+   (0, 0, 0) 0.5 0.5;
+   (1, 0, 0) 0.5 0.5;
+   (0, 1, 0) 0.2 0.8;
+   (1, 1, 0) 0.777778 0.222222;
+   (0, 0, 1) 0.5 0.5;
+   (1, 0, 1) 0.666667 0.333333;
+   (0, 1, 1) 0.4 0.6;
+   (1, 1, 1) 0.428571 0.571429;
+}
+probability (CreditRisk | Character, Capacity, Capital, Collateral, Terms) {
+   (0, 0, 0, 0, 0) 0.285714 0.714286;
+   (1, 0, 0, 0, 0) 0.354167 0.645833;
+   (0, 1, 0, 0, 0) 0.4375 0.5625;
+   (1, 1, 0, 0, 0) 0.238095 0.761905;
+   (0, 0, 1, 0, 0) 0.384615 0.615385;
+   (1, 0, 1, 0, 0) 0.23913 0.76087;
+   (0, 1, 1, 0, 0) 0.181818 0.818182;
+   (1, 1, 1, 0, 0) 0.265306 0.734694;
+   (0, 0, 0, 1, 0) 0.263158 0.736842;
+   (1, 0, 0, 1, 0) 0.351351 0.648649;
+   (0, 1, 0, 1, 0) 0.333333 0.666667;
+   (1, 1, 0, 1, 0) 0.272727 0.727273;
+   (0, 0, 1, 1, 0) 0.3 0.7;
+   (1, 0, 1, 1, 0) 0.298507 0.701493;
+   (0, 1, 1, 1, 0) 0.272727 0.727273;
+   (1, 1, 1, 1, 0) 0.344262 0.655738;
+   (0, 0, 0, 0, 1) 0.588235 0.411765;
+   (1, 0, 0, 0, 1) 0.425 0.575;
+   (0, 1, 0, 0, 1) 0.230769 0.769231;
+   (1, 1, 0, 0, 1) 0.295455 0.704545;
+   (0, 0, 1, 0, 1) 0.285714 0.714286;
+   (1, 0, 1, 0, 1) 0.288136 0.711864;
+   (0, 1, 1, 0, 1) 0.3125 0.6875;
+   (1, 1, 1, 0, 1) 0.377778 0.622222;
+   (0, 0, 0, 1, 1) 0.333333 0.666667;
+   (1, 0, 0, 1, 1) 0.344828 0.655172;
+   (0, 1, 0, 1, 1) 0.266667 0.733333;
+   (1, 1, 0, 1, 1) 0.291667 0.708333;
+   (0, 0, 1, 1, 1) 0.25 0.75;
+   (1, 0, 1, 1, 1) 0.272727 0.727273;
+   (0, 1, 1, 1, 1) 0.333333 0.666667;
+   (1, 1, 1, 1, 1) 0.347826 0.652174;
+}
+
