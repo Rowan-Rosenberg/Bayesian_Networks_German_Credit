@@ -1,4 +1,4 @@
-network ""GermanCreditManualBN"" {
+network "GermanCreditManualBN" {
 // written by aGrUM 2.2.1
 }
 
